@@ -43,18 +43,21 @@
 
     <Button
         android:id="@+id/button"
-        style="@android:style/Widget.Material.Button.Colored"
+        style="@android:style/Widget.Material.Light.Button"
         android:layout_width="320dp"
         android:layout_height="36dp"
         android:layout_marginTop="40dp"
         android:background="#F85F6A"
+        android:cursorVisible="false"
+        android:ellipsize="none"
+        android:shadowRadius="2"
         android:text="Sign In"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#F85F6A"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
