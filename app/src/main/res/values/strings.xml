@@ -9,4 +9,5 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="sign_in_page">Sign In</string>
+    <string name="date_your_eve">DateYourEve</string>
 </resources>
