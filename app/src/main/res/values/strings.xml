@@ -19,3 +19,6 @@
     <string name="passworderror">Enter a valid Password</string>
 
 </resources>
+    <string name="emailerror">Enter a valid Email</string>
+    <string name="passworderror">Enter a valid Password</string>
+</resources>
