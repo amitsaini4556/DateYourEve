@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Slider">
+            android:name=".Slider"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
