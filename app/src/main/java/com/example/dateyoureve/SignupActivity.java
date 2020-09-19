@@ -12,7 +12,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
 
-public class Sign_In extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity{
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     //"(?=.*[0-9])" +         //at least 1 digit
@@ -29,7 +29,7 @@ public class Sign_In extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign__in);
+        setContentView(R.layout.activity_signup);
 
         textInputEmail = findViewById(R.id.text_input_email);
         textInputPassword = findViewById(R.id.text_input_password);
@@ -70,8 +70,8 @@ public class Sign_In extends AppCompatActivity {
         Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
     }
 
-    public void signup(View view) {
-        Intent intant = new Intent(Sign_In.this,SignupActivity.class);
+    public void signin(View view) {
+        Intent intant = new Intent(SignupActivity.this,Sign_In.class);
         startActivity(intant);
     }
 }
