@@ -1,7 +1,6 @@
 package com.example.dateyoureve;
 
 import android.content.Context;
-import android.print.PageRange;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
