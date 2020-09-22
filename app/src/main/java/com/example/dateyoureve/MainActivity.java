@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
                     launcherManager.setFirstLaunch(false);
                     Intent signinIntent = new Intent(MainActivity.this, Slider.class);
                     startActivity(signinIntent);
-                    finish();
                 } else
                     startActivity(new Intent(getApplicationContext(), Sign_In.class));
+                finish();
             }},3000);
     }
 }
