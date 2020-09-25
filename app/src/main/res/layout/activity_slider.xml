@@ -6,10 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".Slider">
 
+
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pager"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/SliderDots"
+        android:layout_width="228dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/pager"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
 
     <Button
         android:id="@+id/button"
