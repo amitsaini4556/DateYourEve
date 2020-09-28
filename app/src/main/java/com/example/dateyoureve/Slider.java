@@ -1,10 +1,5 @@
 package com.example.dateyoureve;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +8,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 public class Slider extends AppCompatActivity {
     ViewPager viewPager;
@@ -65,8 +64,8 @@ public class Slider extends AppCompatActivity {
                 }
                 else {
                     //go to sign up or sign in screen
-                    startActivity(new Intent(getApplicationContext(),SignupActivity.class)
-                            );
+                    startActivity(new Intent(getApplicationContext(),SignupActivity.class));
+                    finish();
                 }
             }
         });
