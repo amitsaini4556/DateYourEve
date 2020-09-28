@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_pro"
+        android:name="com.example.dateyoureve.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/profile_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_fav"
+        android:name="com.example.dateyoureve.ui.dashboard.DashboardFragment"
+        android:label="Favourite"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.dateyoureve.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_rec"
+        android:name="com.example.dateyoureve.ui.recent.RecentFragment"
+        android:label="Recent"
+        tools:layout="@layout/recent_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_not"
+        android:name="com.example.dateyoureve.ui.notifications.NotificationsFragment"
+        android:label="Notification"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>

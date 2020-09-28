@@ -68,6 +68,9 @@ public class SignupActivity extends AppCompatActivity{
         input += "\n";
         input += "Password: " + textInputPassword.getEditText().getText().toString();
         Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
+        Intent intant = new Intent(SignupActivity.this,Home.class);
+        startActivity(intant);
+        this.finish();
     }
 
     public void signin(View view) {
