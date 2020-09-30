@@ -23,8 +23,21 @@ public class SignupActivity extends AppCompatActivity{
                     "(?=\\S+$)" +           //no white spaces
                     ".{4,}" +               //at least 4 characters
                     "$");
+    private static final Pattern USER_NAME =
+            Pattern.compile("^" +
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$");
+    private static final Pattern VALID_PHONE =
+            Pattern.compile("^" +
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{10,}" +               //at least 10 characters
+                    "$");
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
+    private TextInputLayout textInputUser;
+    private TextInputLayout textInputPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,8 @@ public class SignupActivity extends AppCompatActivity{
 
         textInputEmail = findViewById(R.id.text_input_email);
         textInputPassword = findViewById(R.id.text_input_password);
+        textInputUser = findViewById(R.id.text_input_username);
+        textInputPhone = findViewById(R.id.text_input_phone);
     }
     private boolean validateEmail() {
         String emailInput = textInputEmail.getEditText().getText().toString().trim();
@@ -44,6 +59,32 @@ public class SignupActivity extends AppCompatActivity{
             return false;
         } else {
             textInputEmail.setError(null);
+            return true;
+        }
+    }
+    private boolean validateUsername() {
+        String userInput = textInputUser.getEditText().getText().toString().trim();
+        if (userInput.isEmpty()) {
+            textInputUser.setError("Field can't be empty");
+            return false;
+        } else if (!USER_NAME.matcher(userInput).matches()) {
+            textInputUser.setError("Please enter a valid username");
+            return false;
+        } else {
+            textInputUser.setError(null);
+            return true;
+        }
+    }
+    private boolean validatePhone() {
+        String phoneInput = textInputPhone.getEditText().getText().toString().trim();
+        if (phoneInput.isEmpty()) {
+            textInputPhone.setError("Field can't be empty");
+            return false;
+        } else if (!VALID_PHONE.matcher(phoneInput).matches()) {
+            textInputPhone.setError("Please enter a valid mobile no.");
+            return false;
+        } else {
+            textInputPhone.setError(null);
             return true;
         }
     }
@@ -61,7 +102,7 @@ public class SignupActivity extends AppCompatActivity{
         }
     }
     public void confirmInput(View v) {
-        if (!validateEmail() | !validatePassword()) {
+        if (!validateEmail() | !validatePassword() | !validateUsername() | !validatePhone()) {
             return;
         }
         String input = "Email: " + textInputEmail.getEditText().getText().toString();
