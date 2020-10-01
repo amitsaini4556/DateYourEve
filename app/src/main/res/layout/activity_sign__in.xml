@@ -19,7 +19,8 @@
         android:textColor="#100101"
         android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-2dp" />
+        tools:layout_editor_absoluteX="-2dp"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_email"
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/custom_email"
             android:drawablePadding="10dp"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColorHighlight="@color/colorPrimary"
             android:textColorLink="@color/colorPrimary" />
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/custom_password"
             android:drawablePadding="10dp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +73,7 @@
         android:layout_marginTop="50dp"
         android:background="@color/colorPrimary"
         android:onClick="confirmInput"
-        android:text="Continue"
+        android:text="@string/continue_btn"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/text_input_password"
         app:layout_constraintTop_toBottomOf="@+id/text_input_password" />
@@ -93,7 +94,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="80dp"
         android:onClick="signup"
-        android:text="Register Here"
+        android:text="@string/register_here"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
@@ -113,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:onClick="signup"
-        android:text="Don't have an account ?"
+        android:text="@string/don_t_have_an_account"
         app:layout_constraintEnd_toStartOf="@+id/textView14"
         app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
