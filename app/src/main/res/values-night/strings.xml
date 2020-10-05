@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Date YourEve</string>
+    <string name="passwordhint">xxxxxxxx</string>
+    <string name="emailhint">example@gmail.com</string>
+    <string name="forgetpassword">Forget password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="hi_there_nice_to_see_you_again">Hi there! Nice to see you again.</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_in_page">Sign In</string>
+    <string name="date_your_eve">DateYourEve</string>
+    <string name="next">Next</string>
+    <string name="_continue">Continue</string>
+    <string name="welcome">Welcome !!</string>
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="password">Password</string>
+    <string name="continue_btn">Continue</string>
+    <string name="i_agree_to_the">I agree to the</string>
+    <string name="terms_and_services">Terms and Services</string>
+    <string name="and">and</string>
+    <string name="privecy_policy">Privecy Policy</string>
+    <string name="have_an_account">Have an account ?</string>
+    <string name="register_here">Register Here</string>
+    <string name="don_t_have_an_account">Don\'t have an account ?</string>
+</resources>
