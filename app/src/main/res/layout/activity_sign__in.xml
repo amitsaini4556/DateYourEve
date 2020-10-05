@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/backgroundcolor"
     tools:context="com.example.dateyoureve.SignupActivity">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginTop="50dp"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/sign_in"
-        android:textColor="#100101"
+        android:textColor="@color/textcolor"
         android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-2dp"
@@ -25,6 +25,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textColorHint="@color/hintcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -39,6 +40,7 @@
             android:drawablePadding="10dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
+            android:textColor="@color/textcolor"
             android:textColorHighlight="@color/colorPrimary"
             android:textColorLink="@color/colorPrimary" />
 
@@ -47,6 +49,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textColorHint="@color/hintcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -60,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/custom_password"
+            android:textColor="@color/textcolor"
             android:drawablePadding="10dp"
             android:hint="@string/password"
             android:inputType="textPassword" />
@@ -84,6 +88,7 @@
         android:layout_height="wrap_content"
         android:text="@string/forgetpassword"
         android:textAlignment="center"
+        android:textColor="@color/normalcolor"
         app:layout_constraintEnd_toEndOf="@+id/text_input_password"
         app:layout_constraintTop_toBottomOf="@+id/text_input_password" />
 
@@ -105,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/hi_there_nice_to_see_you_again"
+        android:textColor="@color/normalcolor"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -115,6 +121,7 @@
         android:layout_marginTop="10dp"
         android:onClick="signup"
         android:text="@string/don_t_have_an_account"
+        android:textColor="@color/normalcolor"
         app:layout_constraintEnd_toStartOf="@+id/textView14"
         app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
