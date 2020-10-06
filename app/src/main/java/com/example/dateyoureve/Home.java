@@ -1,30 +1,63 @@
 package com.example.dateyoureve;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
+import com.example.dateyoureve.ui.FavouriteFragment;
+import com.example.dateyoureve.ui.HomeFragment;
+import com.example.dateyoureve.ui.NotificationFragment;
+import com.example.dateyoureve.ui.ProfileFragment;
+import com.example.dateyoureve.ui.RecentFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
-
+    BottomNavigationView bottomNavigationView;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_pro, R.id.navigation_not, R.id.navigation_fav, R.id.navigation_rec)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+
+        toolbar = findViewById(R.id.toolbar_appbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_home);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+        bottomMenu();
+    }
+
+    private void bottomMenu() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment = null;
+                int id = menuItem.getItemId();
+                if (R.id.navigation_home == id) {
+                    fragment = new HomeFragment();
+                    toolbar.setTitle(getResources().getString(R.string.title_home));
+                } else if (R.id.navigation_pro == id) {
+                    fragment = new ProfileFragment();
+                    toolbar.setTitle(getResources().getString(R.string.title_profile));
+                } else if (R.id.navigation_rec == id) {
+                    fragment = new RecentFragment();
+                    toolbar.setTitle(getResources().getString(R.string.title_recent));
+                } else if (R.id.navigation_not == id) {
+                    fragment = new NotificationFragment();
+                    toolbar.setTitle(getResources().getString(R.string.title_notifications));
+                } else if (R.id.navigation_fav == id) {
+                    fragment = new FavouriteFragment();
+                    toolbar.setTitle(getResources().getString(R.string.title_favourite));
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+                return true;
+            }
+        });
     }
 
 }

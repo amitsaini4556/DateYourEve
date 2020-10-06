@@ -3,8 +3,8 @@
     <color name="colorPrimary">#f85f6a</color>
     <color name="colorPrimaryDark">#f85f6a</color>
     <color name="colorAccent">#f85f6a</color>
-    <color name="backgroundcolor">#ffffff</color>
-    <color name="textcolor">#000000</color>
+    <color name="backgroundcolor">#000000</color>
+    <color name="textcolor">#ffffff</color>
     <color name="hintcolor">#c2c2c2</color>
     <color name="normalcolor">#808080</color>
     <color name="mtrl_textinput_default_box_stroke_color" override="true">#c2c2c2</color>
