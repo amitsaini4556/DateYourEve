@@ -10,4 +10,5 @@
     <color name="mtrl_textinput_default_box_stroke_color" override="true">#c2c2c2</color>
     <color name="mtrl_textinput_disabled_color" override="true">#c2c2c2</color>
     <color name="mtrl_textinput_hovered_box_stroke_color" override="true">#f85f6a</color>
+    <color name="card_backgrond">#454545</color>
 </resources>

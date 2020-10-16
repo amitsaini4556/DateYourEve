@@ -1,5 +1,5 @@
 package com.example.dateyoureve;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -22,13 +22,13 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Intent intent = getIntent();
         toolbar = findViewById(R.id.toolbar_appbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_home);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment(intent.getStringExtra("latitude"),intent.getStringExtra("longit"),intent.getStringExtra("country"),intent.getStringExtra("locality"),intent.getStringExtra("addr"))).commit();
         bottomMenu();
     }
 
@@ -39,7 +39,8 @@ public class Home extends AppCompatActivity {
                 Fragment fragment = null;
                 int id = menuItem.getItemId();
                 if (R.id.navigation_home == id) {
-                    fragment = new HomeFragment();
+                    Intent intent = getIntent();
+                    fragment = new HomeFragment(intent.getStringExtra("latitude"),intent.getStringExtra("longit"),intent.getStringExtra("country"),intent.getStringExtra("locality"),intent.getStringExtra("addr"));
                     toolbar.setTitle(getResources().getString(R.string.title_home));
                 } else if (R.id.navigation_pro == id) {
                     fragment = new ProfileFragment();

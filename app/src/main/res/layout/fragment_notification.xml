@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.NotificationFragment"
     android:background="@color/backgroundcolor"
-    style="@style/AppTheme.NoActionBar">
+    style="@style/AppTheme.NoActionBar"
+    android:layout_marginTop="?actionBarSize"
+    android:layout_marginBottom="?actionBarSize">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
