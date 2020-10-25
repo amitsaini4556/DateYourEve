@@ -13,7 +13,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class SignupActivity extends AppCompatActivity{
-    UserLocation userLocation;
+    SignupActivity signupActivity;
     TextInputLayout textInputEmail;
     TextInputLayout textInputPassword;
     TextInputLayout textInputUser;
@@ -30,9 +30,9 @@ public class SignupActivity extends AppCompatActivity{
         setContentView(R.layout.activity_signup);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        new UserLocation(this);
+        UserLocation userLocation = new UserLocation(this);
         btnToggleDark  = findViewById(R.id.darkmode);
-        new DarkMode(this);
+        DarkMode darkMode = new DarkMode(this);
 
         textInputEmail = findViewById(R.id.text_input_email);
         textInputPassword = findViewById(R.id.text_input_password);

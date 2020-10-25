@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".EventDetails"
+    tools:showIn="@layout/activity_event_details"
+    android:background="@color/backgroundcolor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Description"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/textcolor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Other than technical experiences, being at the forefront of organizing many events in college has exposed Amit to the management field. Also, he is an active volunteer at NSS. Amit is the overall coordinator of Ecell-CTAE and also a part of the programming club."
+            android:textColor="@color/textcolor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/textcolor"
+            android:text="Date, Time, Venue"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/textcolor"
+            android:text="24 Oct 2020 || CSE Department CTAE college Udaipur"
+            app:layout_constraintStart_toStartOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/textcolor"
+            android:text="Please Note"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="383dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Other than technical experiences, being at the forefront of organizing many events in college has exposed Amit to the management field. Also, he is an active volunteer at NSS. Amit is the overall coordinator of Ecell-CTAE and also a part of the programming club."
+            android:textColor="@color/textcolor"
+            app:layout_constraintEnd_toEndOf="@+id/textView18"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="409dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView19"
+            app:layout_constraintStart_toStartOf="@+id/textView23"
+            app:layout_constraintTop_toBottomOf="@+id/textView23"
+            app:cardBackgroundColor="@color/card_backgrond">
+                <android.widget.Button
+                    android:layout_margin="15dp"
+                    android:id="@+id/call"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/textcolor"
+                    android:background="@drawable/transparent_button"
+                    android:text="CALL" />
+
+                <android.widget.Button
+                    android:id="@+id/direction"
+                    android:layout_margin="15dp"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+                    android:textColor="@color/textcolor"
+                    android:background="@drawable/transparent_button"
+                    android:text="Direction" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="409dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/card1"
+            app:layout_constraintStart_toStartOf="@+id/card1"
+            app:layout_constraintTop_toBottomOf="@+id/card1"
+            app:cardBackgroundColor="@color/card_backgrond">
+            <Button
+                android:id="@+id/register"
+                android:layout_margin="15dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:text="Register" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
