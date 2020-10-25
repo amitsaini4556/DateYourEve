@@ -28,7 +28,7 @@ public class EventDetails extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EventDetails.this,PaymentOption.class);
+                Intent intent = new Intent(EventDetails.this,EventDetails.class);
                 startActivity(intent);
             }
         });
