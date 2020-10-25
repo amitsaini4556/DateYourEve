@@ -8,6 +8,8 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
-    <item android:title="Create event" />
+    <item
+        android:id="@+id/create_event"
+        android:title="Create event" />
     <item android:title="Past enents" />
 </menu>

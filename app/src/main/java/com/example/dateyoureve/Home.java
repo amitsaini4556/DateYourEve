@@ -31,7 +31,18 @@ public class Home extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment(intent.getStringExtra("latitude"),intent.getStringExtra("longit"),intent.getStringExtra("country"),intent.getStringExtra("locality"),intent.getStringExtra("addr"))).commit();
         bottomMenu();
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId()) {
+            case R.id.create_event:
+                Intent intent=new Intent(this,CreateEvent.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     private void bottomMenu() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
