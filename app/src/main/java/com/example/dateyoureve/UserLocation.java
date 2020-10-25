@@ -86,7 +86,7 @@ public class UserLocation extends SignupActivity {
         mLocationRequest.setInterval(5);
         mLocationRequest.setFastestInterval(0);
         mLocationRequest.setNumUpdates(1);
-        signupActivity.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        signupActivity.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(signupActivity);
 
         signupActivity.mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
     }
