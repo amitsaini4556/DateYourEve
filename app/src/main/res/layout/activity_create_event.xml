@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:background="@color/backgroundcolor"
         android:orientation="vertical"
-        android:padding="16dp"
         tools:context="com.example.dateyoureve.CreateEvent">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -21,13 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
             android:hint="Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <com.google.android.material.textfield.TextInputEditText
 
@@ -337,6 +336,19 @@
                 android:minLines="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Event form"
+            app:titleTextColor="#ffffff"
+            android:textAlignment="center"
+            app:navigationIcon="@drawable/ic_arrow_back_white"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
