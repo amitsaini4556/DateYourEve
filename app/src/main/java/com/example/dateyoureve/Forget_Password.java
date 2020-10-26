@@ -1,12 +1,10 @@
 package com.example.dateyoureve;
 
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Bundle;
-
 public class Forget_Password extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
