@@ -1,21 +1,24 @@
 package com.example.dateyoureve;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
+
+import static com.example.dateyoureve.R.color.textcolor;
 
 public class CreateEvent extends AppCompatActivity {
     TextView textView;
@@ -46,6 +49,10 @@ public class CreateEvent extends AppCompatActivity {
             }
         });
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     public void show_input_box(View view) {
@@ -60,9 +67,12 @@ public class CreateEvent extends AppCompatActivity {
         textInputLayout = new TextInputLayout(this, null, R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox);
         textInputLayout.setHint("Fees");;
         textInputLayout.setBoxBackgroundMode(TextInputLayout.BOX_BACKGROUND_OUTLINE);
+        textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.hintcolor)));
+        textInputLayout.setPadding(20,0,0,0);
         textInputLayout.setBoxCornerRadii(5, 5, 5, 5);
         textInputEditText = new TextInputEditText(textInputLayout.getContext());
         textInputLayout.addView(textInputEditText);
+        textInputEditText.setTextColor(ColorStateList.valueOf(getResources().getColor(textcolor)));
 
         if (checkBox.isChecked()) {
 
