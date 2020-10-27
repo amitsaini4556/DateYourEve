@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundcolor"
-    android:backgroundTint="#FFFFFF">
+    android:background="@color/backgroundcolor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/backgroundcolor"
         android:orientation="vertical"
-        android:padding="16dp"
         tools:context="com.example.dateyoureve.CreateEvent">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -21,19 +19,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
             android:hint="Title"
+            android:textColorHint="@color/hintcolor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <com.google.android.material.textfield.TextInputEditText
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="1" />
+                android:singleLine="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -46,6 +45,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:hint="Description"
+            android:textColorHint="@color/hintcolor"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
@@ -54,7 +54,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="2" />
+                android:inputType="textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,6 +68,7 @@
             android:paddingLeft="2sp"
             android:paddingTop="5sp"
             android:text="Date"
+            android:textColor="@color/textcolor"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
             app:layout_constraintHorizontal_bias="0.069"
@@ -89,11 +90,12 @@
             android:id="@+id/venue"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="291dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:hint="Venue"
+            android:textColorHint="@color/hintcolor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +105,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="1" />
+                android:singleLine="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +115,7 @@
             android:layout_height="42dp"
             android:layout_marginStart="7dp"
             android:layout_marginTop="16dp"
-            android:background="#FFFFFF"
+            android:background="@color/backgroundcolor"
             app:layout_constraintEnd_toEndOf="@+id/pick_date"
             app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toEndOf="@+id/venue"
@@ -124,9 +126,10 @@
             android:id="@+id/image"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="291dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:hint="Venue"
+            android:hint="source"
+            android:textColorHint="@color/hintcolor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/venue"
@@ -136,17 +139,18 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="1" />
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="55dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="46dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="25dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintHorizontal_bias="0.327"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toBottomOf="@+id/get_location"
             app:srcCompat="@drawable/ic_baseline_image_search_24" />
@@ -169,10 +173,11 @@
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="123dp"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:textColor="@color/textcolor"
             app:layout_constraintEnd_toEndOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.255"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/cb"
             app:layout_constraintTop_toBottomOf="@+id/image">
 
@@ -205,13 +210,17 @@
                 android:id="@+id/radioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Online" />
+                android:text="Online"
+                android:buttonTint="@color/colorPrimary"
+                android:textColor="@color/textcolor"/>
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Offline" />
+                android:text="Offline"
+                android:buttonTint="@color/colorPrimary"
+                android:textColor="@color/textcolor"/>
         </RadioGroup>
 
         <TextView
@@ -244,7 +253,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
-                android:hint="Time" />
+                android:hint="Time"
+                android:textColorHint="@color/hintcolor"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
@@ -261,14 +271,18 @@
                 android:layout_width="46dp"
                 android:layout_height="44dp"
                 android:layout_weight="1"
-                android:text="a. m" />
+                android:text="a.m"
+                android:buttonTint="@color/colorPrimary"
+                android:textColor="@color/textcolor"/>
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="p.m" />
+                android:text="p.m"
+                android:buttonTint="@color/colorPrimary"
+                android:textColor="@color/textcolor"/>
         </RadioGroup>
 
         <LinearLayout
@@ -314,6 +328,8 @@
             android:layout_height="wrap_content"
             android:onClick="show_input_box"
             android:text="Paid"
+            android:textColor="@color/textcolor"
+            android:buttonTint="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="@+id/paid_unpaid"
             app:layout_constraintTop_toBottomOf="@+id/paid_unpaid" />
 
@@ -326,6 +342,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:hint="Additional information"
+            android:textColorHint="@color/hintcolor"
             app:layout_constraintEnd_toEndOf="@+id/radioGroup3"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -334,9 +351,22 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="2" />
+                android:inputType="textMultiLine"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Event form"
+            app:titleTextColor="#ffffff"
+            android:textAlignment="center"
+            app:navigationIcon="@drawable/ic_arrow_back_white"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
