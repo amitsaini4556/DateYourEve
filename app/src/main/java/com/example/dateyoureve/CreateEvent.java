@@ -1,6 +1,7 @@
 package com.example.dateyoureve;
 
 import android.app.DatePickerDialog;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
+
+import static com.example.dateyoureve.R.color.textcolor;
 
 public class CreateEvent extends AppCompatActivity {
     TextView textView;
@@ -64,9 +67,12 @@ public class CreateEvent extends AppCompatActivity {
         textInputLayout = new TextInputLayout(this, null, R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox);
         textInputLayout.setHint("Fees");;
         textInputLayout.setBoxBackgroundMode(TextInputLayout.BOX_BACKGROUND_OUTLINE);
+        textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.hintcolor)));
+        textInputLayout.setPadding(20,0,0,0);
         textInputLayout.setBoxCornerRadii(5, 5, 5, 5);
         textInputEditText = new TextInputEditText(textInputLayout.getContext());
         textInputLayout.addView(textInputEditText);
+        textInputEditText.setTextColor(ColorStateList.valueOf(getResources().getColor(textcolor)));
 
         if (checkBox.isChecked()) {
 
