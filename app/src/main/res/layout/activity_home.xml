@@ -9,27 +9,30 @@
     tools:context=".Home"
     style="@style/AppTheme.NoActionBar">
 
-   <com.google.android.material.appbar.AppBarLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/appbar"
-       android:theme="@style/AppTheme.NoActionBar">
-       <androidx.appcompat.widget.Toolbar
-           android:id="@+id/toolbar_appbar"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:menu="@menu/appbar"
-           app:titleTextColor="#ffffff"
-           android:theme="@style/AppTheme.NoActionBar"
-           />
-   </com.google.android.material.appbar.AppBarLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar"
+        android:theme="@style/AppTheme.NoActionBar">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/appbar"
+            app:titleTextColor="#ffffff"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
-       android:id="@+id/bottom_navigation"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:menu="@menu/bottom_nav_menu"
-       android:gravity="bottom"
-       android:layout_alignParentBottom="true"
-       android:elevation="8dp"
-       style="r@style/AppTheme.NoActionBar"/>
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:elevation="8dp"
+        style="r@style/AppTheme.NoActionBar"
+        android:background="@color/backgroundcolor"
+        app:itemIconTint="@drawable/tab_color"
+        />
 </RelativeLayout>
