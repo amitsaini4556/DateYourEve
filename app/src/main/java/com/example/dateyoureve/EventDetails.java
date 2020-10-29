@@ -1,5 +1,6 @@
 package com.example.dateyoureve;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class EventDetails extends AppCompatActivity {
-    Button callbutton,register;
+    Button callbutton,register,direction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,14 +26,25 @@ public class EventDetails extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         register = findViewById(R.id.register);
-        register.setOnClickListener(new View.OnClickListener() {
+        direction = findViewById(R.id.direction);
+        direction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EventDetails.this,EventDetails.class);
-                startActivity(intent);
+                String sSource = "shrimadhopur";
+                String sDestination = "udaipur";
+                try {
+                    Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + sSource + "/" + sDestination);
+                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                    intent.setPackage("com.google.android.apps.maps");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }catch (ActivityNotFoundException e){
+                    Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
+                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                    startActivity(intent);
+                }
             }
         });
-        callbutton = findViewById(R.id.call);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +57,7 @@ public class EventDetails extends AppCompatActivity {
                 startActivity(Intent.createChooser(sharingIntent, "Share using"));
             }
         });
-
+        callbutton = findViewById(R.id.call);
         callbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
