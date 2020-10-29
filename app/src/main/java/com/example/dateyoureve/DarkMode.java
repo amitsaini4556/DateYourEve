@@ -11,7 +11,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class DarkMode{
     Button btnToggleDark;
     SignupActivity signupActivity;
-    DarkMode(final SignupActivity signupActivity){
+    public DarkMode(final SignupActivity signupActivity){
         this.signupActivity = signupActivity;
         SharedPreferences sharedPreferences = signupActivity.getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
