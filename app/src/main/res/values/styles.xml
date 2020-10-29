@@ -9,6 +9,8 @@
         <item name="textcolor">#232323</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textColor">@color/textcolor</item>
+        <item name="android:itemBackground">@color/backgroundcolor</item>
     </style>
 
     <style name="darkmode" parent="Theme.MaterialComponents.Light.DarkActionBar">
