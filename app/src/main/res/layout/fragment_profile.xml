@@ -40,6 +40,22 @@
             app:backgroundTint="@android:color/transparent"
             android:elevation="0dp"
             app:elevation="0dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/floatingActionButton"
+            android:clickable="true"
+            android:src="@drawable/ic_logout"
+            android:background="@null"
+            app:backgroundTint="@android:color/transparent"
+            android:elevation="0dp"
+            app:elevation="0dp"/>
+
     </RelativeLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="120dp"
