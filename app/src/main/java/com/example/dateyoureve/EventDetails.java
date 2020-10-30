@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +17,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class EventDetails extends AppCompatActivity {
     Button callbutton,register,direction;
+    TextView title,decs,dateVenue,notes;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +26,15 @@ public class EventDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        toolBarLayout.setTitle(getTitle());
-
+        toolBarLayout.setTitle(getIntent().getStringExtra("title"));
+        decs = findViewById(R.id.decsView);
+        imageView = findViewById(R.id.eventImage);
+        dateVenue = findViewById(R.id.dateVenue);
+        notes = findViewById(R.id.notesView);
+        imageView.setImageResource(getIntent().getIntExtra("image",0));
+        decs.setText(getIntent().getStringExtra("decs"));
+        dateVenue.setText(getIntent().getStringExtra("date") + "  ||  " + getIntent().getStringExtra("venue"));
+        notes.setText(getIntent().getStringExtra("decs"));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         register = findViewById(R.id.register);
         direction = findViewById(R.id.direction);
