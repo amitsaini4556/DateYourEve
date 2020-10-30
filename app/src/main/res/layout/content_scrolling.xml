@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/decsView"
             android:layout_width="384dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -49,10 +49,10 @@
             android:textStyle="bold"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="@+id/textView19"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/decsView" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/dateVenue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -70,17 +70,17 @@
             android:text="Please Note"
             android:textStyle="bold"
             android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="@+id/textView21"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+            app:layout_constraintStart_toStartOf="@+id/dateVenue"
+            app:layout_constraintTop_toBottomOf="@+id/dateVenue" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/notesView"
             android:layout_width="383dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Other than technical experiences, being at the forefront of organizing many events in college has exposed Amit to the management field. Also, he is an active volunteer at NSS. Amit is the overall coordinator of Ecell-CTAE and also a part of the programming club."
             android:textColor="@color/textcolor"
-            app:layout_constraintEnd_toEndOf="@+id/textView18"
+            app:layout_constraintEnd_toEndOf="@+id/decsView"
             app:layout_constraintStart_toStartOf="@+id/textView22"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -90,8 +90,8 @@
             android:layout_height="80dp"
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="@+id/textView19"
-            app:layout_constraintStart_toStartOf="@+id/textView23"
-            app:layout_constraintTop_toBottomOf="@+id/textView23"
+            app:layout_constraintStart_toStartOf="@+id/notesView"
+            app:layout_constraintTop_toBottomOf="@+id/notesView"
             app:cardBackgroundColor="@color/card_backgrond">
                 <android.widget.Button
                     android:layout_margin="15dp"
