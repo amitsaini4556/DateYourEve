@@ -30,7 +30,6 @@ public class SignupActivity extends AppCompatActivity{
         setContentView(R.layout.activity_signup);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        UserLocation userLocation = new UserLocation(this);
         btnToggleDark  = findViewById(R.id.darkmode);
         DarkMode darkMode = new DarkMode(this);
 
