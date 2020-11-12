@@ -34,6 +34,7 @@
             android:layout_marginTop="8dp"
             android:text="Other than technical experiences, being at the forefront of organizing many events in college has exposed Amit to the management field. Also, he is an active volunteer at NSS. Amit is the overall coordinator of Ecell-CTAE and also a part of the programming club."
             android:textColor="@color/textcolor"
+            android:justificationMode="inter_word"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView19"
@@ -78,8 +79,8 @@
             android:layout_width="383dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:justificationMode="inter_word"
             android:text="Other than technical experiences, being at the forefront of organizing many events in college has exposed Amit to the management field. Also, he is an active volunteer at NSS. Amit is the overall coordinator of Ecell-CTAE and also a part of the programming club."
-            android:textColor="@color/textcolor"
             app:layout_constraintEnd_toEndOf="@+id/decsView"
             app:layout_constraintStart_toStartOf="@+id/textView22"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
