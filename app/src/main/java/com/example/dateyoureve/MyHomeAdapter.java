@@ -38,7 +38,7 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final MyHomeData myHomeDataList = myHomeData.get(position);
         holder.titleView.setText(myHomeDataList.getTitle());
         holder.descriptionView.setText(myHomeDataList.getDescription());
@@ -56,6 +56,18 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
                 intent.putExtra("venue", myHomeDataList.getVenue());
                 intent.putExtra("image", myHomeDataList.getImage());
                 context.startActivity(intent);
+            }
+        });
+        holder.itemView.findViewById(R.id.shareButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT,myHomeDataList.getTitle());
+                String stringMessage = myHomeDataList.getTitle()  + "\n\n" + myHomeDataList.getDescription() +"\n\n Date :" + myHomeDataList.getDate() +"\n\n Venue :" +myHomeDataList.getVenue() +"\n\n";
+                stringMessage = stringMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID;
+                shareIntent.putExtra(Intent.EXTRA_TEXT, stringMessage);
+                context.startActivity(Intent.createChooser(shareIntent,"Share via"));
             }
         });
     }
