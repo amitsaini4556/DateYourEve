@@ -27,7 +27,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
-    private List<MyHomeData> myHomeData;;
+    private List<MyHomeData> myHomeData;
     String s1,s2,s3,s4,s5;
     public HomeFragment(String s1, String s2, String s3, String s4, String s5){
         this.s1=s1;
