@@ -4,10 +4,10 @@ import android.net.Uri;
 
 public class MyHomeData {
     private String title,description,date,venue;
-    private Uri image;
+    private String image;
 
     public MyHomeData(){}
-    public MyHomeData(String title, String description, String date, String venue, Uri image) {
+    public MyHomeData(String title, String description, String date, String venue, String image) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -47,11 +47,11 @@ public class MyHomeData {
         this.venue = venue;
     }
 
-    public Uri getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Uri image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

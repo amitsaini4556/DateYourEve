@@ -2,6 +2,7 @@ package com.example.dateyoureve;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -14,10 +15,10 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Objects;
 
 import ru.semkin.yandexplacepicker.PlaceParcelable;
 import ru.semkin.yandexplacepicker.YandexPlacePicker;
@@ -48,7 +50,7 @@ import static com.example.dateyoureve.R.color.textcolor;
 public class CreateEvent extends AppCompatActivity {
     TextView textView;
     Button button;
-    private int date,month,year;
+    private int cdate,cmonth,cyear,mHour, mMinute;
     int PLACE_PICKER_REQUEST = 1;
     Button selectvenue;
     // view for image view
@@ -59,7 +61,7 @@ public class CreateEvent extends AppCompatActivity {
 
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
-    Button btnSelectImage,cancel,create;
+    Button btnSelectImage,cancel,create,btnTimePicker;
     TextInputLayout titleEvent,decriptionEvent,timeInputEvent,notes;
     RadioGroup radioGroupOnOffMode,radioGroupAmPm;
     CheckBox paidCheckBox;
@@ -73,9 +75,10 @@ public class CreateEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
         textView=(TextView)findViewById(R.id.date_text);
-        button=(Button)findViewById(R.id.pick_date);
+        button=findViewById(R.id.pick_date);
         selectvenue = findViewById(R.id.selectVenue);
         btnSelectImage = findViewById(R.id.chooseImage);
+        btnTimePicker=findViewById(R.id.picktime);
         imageView = findViewById(R.id.image);
         titleEvent = findViewById(R.id.titleEvent);
         decriptionEvent = findViewById(R.id.desEvent);
@@ -84,23 +87,14 @@ public class CreateEvent extends AppCompatActivity {
         cancel = findViewById(R.id.cancelEvent);
         create = findViewById(R.id.createEvent);
         radioGroupOnOffMode = findViewById(R.id.radioGroupEventOnOff);
-        radioGroupAmPm = findViewById(R.id.radioGroupAmPm);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        paidCheckBox = findViewById(R.id.cb);
         mDatabase = FirebaseDatabase.getInstance();
         databaseReference = mDatabase.getReference("Events");
         storageReference = FirebaseStorage.getInstance().getReference("Images");
         progressDialog = new ProgressDialog(CreateEvent.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
-        if(paidCheckBox.isChecked())
-        {
-            isFree = "Paid Event" + fees;
-        }
-        else
-        {
-            isFree = "Free Event";
-        }
+
         radioGroupOnOffMode.setOnCheckedChangeListener((radioGroup, i) -> {
             switch (i){
                 case R.id.offline:
@@ -133,26 +127,52 @@ public class CreateEvent extends AppCompatActivity {
                 Toast.makeText(CreateEvent.this, "Error! Add all fields", Toast.LENGTH_SHORT).show();
             }
         });
+
+        btnTimePicker.setOnClickListener(view -> {
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+                            if(minute<10)
+                            Objects.requireNonNull(timeInputEvent.getEditText()).setText(hourOfDay + ":0" + minute);
+                            else
+                                Objects.requireNonNull(timeInputEvent.getEditText()).setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, true);
+            timePickerDialog.show();
+        });
         button.setOnClickListener(view -> {
             final Calendar calendar=Calendar.getInstance();
-            date=calendar.get(Calendar.DATE);
-            month=calendar.get(Calendar.MONTH);
-            year=calendar.get(Calendar.YEAR);
+            cdate=calendar.get(Calendar.DATE);
+            cmonth=calendar.get(Calendar.MONTH);
+            cyear=calendar.get(Calendar.YEAR);
 
             DatePickerDialog datePickerDialog =new DatePickerDialog(CreateEvent.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                    if((date>cdate && month == cmonth && year==cyear) || (date == cdate && month > cmonth && year==cyear) ||(date == cdate && month == cmonth && year > cyear))
                     textView.setText(date+"/"+month+"/"+year);
+                    else
+                        Toast.makeText(CreateEvent.this, "Please enter valid date", Toast.LENGTH_SHORT).show();
                 }
-            },year,month,date);
+            },cyear,cmonth,cdate);
             datePickerDialog.show();
         });
+
         selectvenue.setOnClickListener(view -> {
             YandexPlacePicker.IntentBuilder builder = new YandexPlacePicker.IntentBuilder();
             builder.setYandexMapsKey("245bda3d-eba8-4fec-a792-f11f3e79fc02");
             Intent placeIntent = builder.build(CreateEvent.this);
             startActivityForResult(placeIntent, PLACE_PICKER_REQUEST);
         });
+
         btnSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -215,36 +235,6 @@ public class CreateEvent extends AppCompatActivity {
         }
     }
 
-    public void show_input_box(View view) {
-        CheckBox checkBox=findViewById(R.id.cb);
-        FrameLayout frameLayout;
-        TextInputLayout textInputLayout;
-        TextInputEditText textInputEditText;
-
-
-        // Check which radio button was clicked
-        frameLayout= (FrameLayout)findViewById(R.id.container);
-        textInputLayout = new TextInputLayout(this, null, R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox);
-        textInputLayout.setHint("Fees");;
-        textInputLayout.setBoxBackgroundMode(TextInputLayout.BOX_BACKGROUND_OUTLINE);
-        textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.hintcolor)));
-        textInputLayout.setPadding(20,0,0,0);
-        textInputLayout.setBoxCornerRadii(5, 5, 5, 5);
-        textInputEditText = new TextInputEditText(textInputLayout.getContext());
-        textInputLayout.addView(textInputEditText);
-        textInputEditText.setTextColor(ColorStateList.valueOf(getResources().getColor(textcolor)));
-
-        if (checkBox.isChecked()) {
-
-            frameLayout.addView(textInputLayout);
-            fees = textInputEditText.getText().toString();
-        }
-        else
-        {
-            frameLayout.removeAllViews();
-            fees = " ";
-        }
-    }
     private String getFileExtension(Uri uri)
     {
         ContentResolver contentResolver = getContentResolver();
