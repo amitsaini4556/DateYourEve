@@ -20,6 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dateyoureve.MyHomeAdapter;
 import com.example.dateyoureve.MyHomeData;
 import com.example.dateyoureve.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private List<MyHomeData> myHomeData;
+    DatabaseReference databaseReference;
     String s1,s2,s3,s4,s5;
     public HomeFragment(String s1, String s2, String s3, String s4, String s5){
         this.s1=s1;
@@ -56,11 +62,21 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         myHomeData = new ArrayList<MyHomeData>();
-              myHomeData.add(new MyHomeData("Ecell, CTAE","To connect with entrepreneurial leaders, innovators and alumni of CTAE, Udaipur and engage them to foster the same passion and spirit in the current breed of students .","20/10/2020","CSE departmnet",R.drawable.download));
-              myHomeData.add(new MyHomeData("Online Webinar","In this time of crisis we came across many students who have doubts regarding what next? Amongst many internship opportunities being cancelled, no sign of job interviews, even examination being delayed, we all have found ourselves wondering how can we utilise this time?","21/10/2020","CSE departmnet",R.drawable.i1));
-              myHomeData.add(new MyHomeData("Something About ML","Machine learning is an application of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience without being explicitly programmed. Machine learning focuses on the development of computer programs that can access data and use it learn for themselves","22/10/2020","CSE departmnet",R.drawable.i2));
-              myHomeData.add(new MyHomeData("Programming...","Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using a variety of computer programming languages, such as JavaScript, Python, and C++. Created by Pamela Fox.","23/10/2020","CSE departmnet",R.drawable.i3));
-              myHomeData.add(new MyHomeData("PrePlacement Talk","Pre-placement talks or we call it as the discussion about the company .Here we came to know about various aspects of a company and it tells us that if we are suitable enough to work for a company.","24/10/2020","CSE departmnet",R.drawable.i4));
+        databaseReference = FirebaseDatabase.getInstance().getReference("Events");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    myHomeData.add(dataSnapshot.getValue(MyHomeData.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         myHomeAdapter = new MyHomeAdapter(myHomeData,HomeFragment.this);
         recyclerView.setAdapter(myHomeAdapter);
         return root;
@@ -91,5 +107,4 @@ public class HomeFragment extends Fragment {
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
-
 }

@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +20,7 @@
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -42,22 +44,21 @@
             android:label="@string/title_activity_event_details"
             android:parentActivityName=".Home"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".Forget_Password"
             android:label="Reset Password"
             android:parentActivityName=".Sign_In"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".CreateEvent"
             android:label="create_event"
-            android:parentActivityName=".Home"
-           />
+            android:parentActivityName=".Home" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAg_q8_CXk_Bah2-VKajdu17eiHCtboDg4" />
     </application>
 
 </manifest>

@@ -44,7 +44,7 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
         holder.descriptionView.setText(myHomeDataList.getDescription());
         holder.dateView.setText(myHomeDataList.getDate());
         holder.venueView.setText(myHomeDataList.getVenue());
-        holder.eventImage.setImageResource(myHomeDataList.getImage());
+        holder.eventImage.setImageURI(myHomeDataList.getImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

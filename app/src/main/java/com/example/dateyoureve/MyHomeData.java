@@ -1,10 +1,13 @@
 package com.example.dateyoureve;
 
+import android.net.Uri;
+
 public class MyHomeData {
     private String title,description,date,venue;
-    private Integer image;
+    private Uri image;
 
-    public MyHomeData(String title, String description, String date, String venue, Integer image) {
+    public MyHomeData(){}
+    public MyHomeData(String title, String description, String date, String venue, Uri image) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -44,11 +47,11 @@ public class MyHomeData {
         this.venue = venue;
     }
 
-    public Integer getImage() {
+    public Uri getImage() {
         return image;
     }
 
-    public void setImage(Integer image) {
+    public void setImage(Uri image) {
         this.image = image;
     }
 }
