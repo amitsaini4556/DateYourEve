@@ -1,6 +1,7 @@
 package com.example.dateyoureve;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
         holder.descriptionView.setText(myHomeDataList.getDescription());
         holder.dateView.setText(myHomeDataList.getDate());
         holder.venueView.setText(myHomeDataList.getVenue());
-        holder.eventImage.setImageURI(myHomeDataList.getImage());
+        holder.eventImage.setImageURI(Uri.parse(myHomeDataList.getImage()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

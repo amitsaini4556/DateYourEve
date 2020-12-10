@@ -1,7 +1,7 @@
 package com.example.dateyoureve;
 
 public class EventDetailsSetter {
-    String title,description,notes,mode,paid,date,image,time,userId;
+    String title,description,notes,mode,date,image,time,userId;
 
 
     public EventDetailsSetter(String title, String description, String notes, String mode, String paid, String image, String date, String time, String userId) {
@@ -9,7 +9,6 @@ public class EventDetailsSetter {
         this.description = description;
         this.notes = notes;
         this.mode = mode;
-        this.paid = paid;
         this.image = image;
         this.date = date;
         this.time = time;
@@ -48,13 +47,6 @@ public class EventDetailsSetter {
         this.mode = mode;
     }
 
-    public String getPaid() {
-        return paid;
-    }
-
-    public void setPaid(String paid) {
-        this.paid = paid;
-    }
 
     public String getImage() {
         return image;

@@ -96,32 +96,6 @@
             app:layout_constraintStart_toStartOf="@+id/desEvent"
             app:layout_constraintTop_toBottomOf="@+id/selectVenue" />
 
-        <TextView
-            android:id="@+id/paid_unpaid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Paid/Unpaid"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/image"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
-
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="123dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="164dp"
-            android:layout_marginTop="12dp"
-            android:textColor="@color/textcolor"
-            app:layout_constraintStart_toEndOf="@+id/cb"
-            app:layout_constraintTop_toBottomOf="@+id/image">
-
-        </FrameLayout>
 
         <TextView
             android:id="@+id/modeEvent"
@@ -131,10 +105,10 @@
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/container"
+            app:layout_constraintEnd_toEndOf="@+id/image"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/cb"
-            app:layout_constraintTop_toBottomOf="@+id/cb" />
+            app:layout_constraintStart_toStartOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/image" />
 
         <RadioGroup
             android:id="@+id/radioGroupEventOnOff"
@@ -181,12 +155,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/timeInputEvent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="137dp"
-            android:layout_height="71dp"
+            android:layout_width="232dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="@+id/radioGroupEventOnOff"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.168"
             app:layout_constraintStart_toStartOf="@+id/radioGroupEventOnOff"
             app:layout_constraintTop_toBottomOf="@+id/timeEvent">
 
@@ -195,36 +169,8 @@
                 android:layout_height="51dp"
                 android:hint="Time"
                 android:inputType="time"
-                android:textColorHint="@color/hintcolor"/>
+                android:textColorHint="@color/hintcolor" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <RadioGroup
-            android:id="@+id/radioGroupAmPm"
-            android:layout_width="164dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toEndOf="@+id/timeInputEvent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroupEventOnOff">
-
-            <RadioButton
-                android:id="@+id/amTime"
-                android:layout_width="46dp"
-                android:layout_height="44dp"
-                android:layout_weight="1"
-                android:buttonTint="@color/colorPrimary"
-                android:text="a.m"
-                android:textColor="@color/textcolor" />
-
-            <RadioButton
-                android:id="@+id/pmTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:buttonTint="@color/colorPrimary"
-                android:text="p.m"
-                android:textColor="@color/textcolor" />
-        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -262,17 +208,6 @@
                 android:insetRight="10dp"
                 android:text="CREATE" />
         </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/cb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="show_input_box"
-            android:text="Paid"
-            android:textColor="@color/textcolor"
-            android:buttonTint="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="@+id/paid_unpaid"
-            app:layout_constraintTop_toBottomOf="@+id/paid_unpaid" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/notes"
@@ -329,6 +264,17 @@
             app:layout_constraintHorizontal_bias="0.464"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toBottomOf="@+id/selectVenue" />
+
+        <Button
+            android:id="@+id/picktime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="184dp"
+            android:text="Set Time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.688"
+            app:layout_constraintStart_toEndOf="@+id/timeInputEvent"
+            app:layout_constraintTop_toBottomOf="@+id/chooseImage" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
