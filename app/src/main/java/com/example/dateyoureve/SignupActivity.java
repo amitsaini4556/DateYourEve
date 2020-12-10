@@ -1,5 +1,6 @@
 package com.example.dateyoureve;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,7 @@ public class SignupActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseReference;
+    ProgressDialog progressDialog;
 
     FusedLocationProviderClient mFusedLocationClient;
 
@@ -39,6 +41,9 @@ public class SignupActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference("users");
@@ -63,6 +68,7 @@ public class SignupActivity extends AppCompatActivity{
     }
     public void registerUser(String email,String password)
     {
+        progressDialog.show();
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -73,6 +79,7 @@ public class SignupActivity extends AppCompatActivity{
                                     Toast.LENGTH_SHORT).show();
                             updateUI(user);
                         } else {
+                            progressDialog.dismiss();
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -86,6 +93,7 @@ public class SignupActivity extends AppCompatActivity{
     {
         User user = new User(textInputUser.getEditText().getText().toString(),textInputPassword.getEditText().getText().toString(),textInputEmail.getEditText().getText().toString(),textInputPhone.getEditText().getText().toString());
         mDatabaseReference.child(currentUser.getUid()).setValue(user);
+        progressDialog.dismiss();
         Intent intant = new Intent(SignupActivity.this,Home.class);
         startActivity(intant);
         this.finish();
