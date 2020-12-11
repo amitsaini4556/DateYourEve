@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -260,13 +261,19 @@ public class CreateEvent extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            EventDetailsSetter eventDetailsSetter = new EventDetailsSetter(title,description,note,mode,isFree,taskSnapshot.getUploadSessionUri().toString(),dateEvent,time,user.getUid());
-                            String uploadId = databaseReference.push().getKey();
-                            databaseReference.child(title).setValue(eventDetailsSetter);
-                            DatabaseReference userData = FirebaseDatabase.getInstance().getReference("users");
-                            EventIdObj eventIdObj = new EventIdObj(uploadId);
-                            userData.child(user.getUid()).child("createdEvents").child(title).setValue(eventIdObj);
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    EventDetailsSetter eventDetailsSetter = new EventDetailsSetter(title,description,note,mode,isFree,uri.toString(),dateEvent,time,user.getUid());
+                                    String uploadId = databaseReference.push().getKey();
+                                    Log.i("test",fileReference.getDownloadUrl().toString());
+                                    databaseReference.child(title).setValue(eventDetailsSetter);
+                                    DatabaseReference userData = FirebaseDatabase.getInstance().getReference("users");
+                                    EventIdObj eventIdObj = new EventIdObj(uploadId);
+                                    userData.child(user.getUid()).child("createdEvents").child(title).setValue(eventIdObj);
+                                }
+                            });
                             progressDialog.dismiss();
                             Toast.makeText(CreateEvent.this, "Event successful created", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(CreateEvent.this,Home.class);

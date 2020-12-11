@@ -20,11 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dateyoureve.MyHomeAdapter;
 import com.example.dateyoureve.MyHomeData;
 import com.example.dateyoureve.R;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +63,26 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         myHomeData = new ArrayList<MyHomeData>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Events");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren())
-                {
-                    myHomeData.add(dataSnapshot.getValue(MyHomeData.class));
-                }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                myHomeData.add(snapshot.getValue(MyHomeData.class));
+                myHomeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
@@ -77,6 +90,21 @@ public class HomeFragment extends Fragment {
 
             }
         });
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot dataSnapshot : snapshot.getChildren())
+//                {
+//                    myHomeData.add(dataSnapshot.getValue(MyHomeData.class));
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         myHomeAdapter = new MyHomeAdapter(myHomeData,HomeFragment.this);
         recyclerView.setAdapter(myHomeAdapter);
         return root;
@@ -102,9 +130,21 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 myHomeAdapter.getFilter().filter(newText);
+                myHomeAdapter.notifyDataSetChanged();
                 return false;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        myHomeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }

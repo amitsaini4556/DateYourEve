@@ -12,19 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.dateyoureve.ui.HomeFragment;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder> implements Filterable {
-
     List<MyHomeData> myHomeData;
     List<MyHomeData> myHomeDataFull;
     HomeFragment context;
+    FirebaseStorage storage  = FirebaseStorage.getInstance();
     public MyHomeAdapter(List<MyHomeData> myHomeData, HomeFragment homeFragment) {
         this.myHomeData = myHomeData;
-        myHomeDataFull = new ArrayList<>(myHomeData);
+        this.myHomeDataFull = new ArrayList<>(myHomeData);
         this.context = homeFragment;
     }
 
@@ -44,7 +46,9 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
         holder.descriptionView.setText(myHomeDataList.getDescription());
         holder.dateView.setText(myHomeDataList.getDate());
         holder.venueView.setText(myHomeDataList.getVenue());
-        holder.eventImage.setImageURI(myHomeDataList.getImage());
+        Glide.with(context)
+                .load(myHomeDataList.getImage())
+                .into(holder.eventImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
