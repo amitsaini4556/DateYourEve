@@ -92,7 +92,7 @@
             android:layout_width="172dp"
             android:layout_height="155dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/fav_background"
+            android:src="@drawable/addimage"
             app:layout_constraintStart_toStartOf="@+id/desEvent"
             app:layout_constraintTop_toBottomOf="@+id/selectVenue" />
 

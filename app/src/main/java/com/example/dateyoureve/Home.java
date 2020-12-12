@@ -35,7 +35,7 @@ public class Home extends AppCompatActivity {
         // If All permission is enabled successfully then this block will execute.
         if(CheckingPermissionIsEnabledOrNot())
         {
-            Toast.makeText(Home.this, "All Permissions Granted Successfully", Toast.LENGTH_LONG).show();
+            //Toast.makeText(Home.this, "All Permissions Granted Successfully", Toast.LENGTH_LONG).show();
         }
 
         // If, If permission is not enabled then else condition will execute.

@@ -27,11 +27,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class UserLocation extends SignupActivity {
-    SignupActivity signupActivity;
+public class UserLocation extends EventDetails {
+    EventDetails eventDetails;
     int PERMISSION_ID = 44;
-    UserLocation(SignupActivity signupActivity){
-        this.signupActivity = signupActivity;
+    UserLocation(EventDetails eventDetails){
+        this.eventDetails = eventDetails;
         getLastLocation();
     }
     @SuppressLint("MissingPermission")
@@ -39,7 +39,7 @@ public class UserLocation extends SignupActivity {
     {
         if (checkPermissions()) {
             if (isLocationEnabled()) {
-                signupActivity.mFusedLocationClient.getLastLocation().addOnCompleteListener(
+                eventDetails.mFusedLocationClient.getLastLocation().addOnCompleteListener(
                         new OnCompleteListener<Location>() {
 
                             @Override
@@ -52,13 +52,13 @@ public class UserLocation extends SignupActivity {
                                 }
                                 else {
                                     try {
-                                        Geocoder geocoder = new Geocoder(signupActivity, Locale.getDefault());
+                                        Geocoder geocoder = new Geocoder(eventDetails, Locale.getDefault());
                                         List<Address> address = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                                        signupActivity.latitude = address.get(0).getLatitude();
-                                        signupActivity.longit = address.get(0).getLongitude();
-                                        signupActivity.country = address.get(0).getCountryName();
-                                        signupActivity.locality = address.get(0).getLocality();
-                                        signupActivity.addr = address.get(0).getAddressLine(0);
+                                        eventDetails.latitude = address.get(0).getLatitude();
+                                        eventDetails.longit = address.get(0).getLongitude();
+                                        eventDetails.country = address.get(0).getCountryName();
+                                        eventDetails.locality = address.get(0).getLocality();
+                                        eventDetails.addr = address.get(0).getAddressLine(0);
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -70,7 +70,7 @@ public class UserLocation extends SignupActivity {
             else {
                 Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                signupActivity.startActivity(intent);
+                eventDetails.startActivity(intent);
             }
         }
         else {
@@ -86,9 +86,9 @@ public class UserLocation extends SignupActivity {
         mLocationRequest.setInterval(5);
         mLocationRequest.setFastestInterval(0);
         mLocationRequest.setNumUpdates(1);
-        signupActivity.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(signupActivity);
+        eventDetails.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(eventDetails);
 
-        signupActivity.mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+        eventDetails.mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
     }
 
     private LocationCallback mLocationCallback = new LocationCallback() {
@@ -98,24 +98,24 @@ public class UserLocation extends SignupActivity {
                 LocationResult locationResult)
         {
             Location mLastLocation = locationResult.getLastLocation();
-            signupActivity.latitude = mLastLocation.getLatitude();
-            signupActivity.longit = mLastLocation.getLongitude();
+            eventDetails.latitude = mLastLocation.getLatitude();
+            eventDetails.longit = mLastLocation.getLongitude();
         }
     };
 
     private boolean checkPermissions()
     {
-        return ActivityCompat.checkSelfPermission(signupActivity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(signupActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        return ActivityCompat.checkSelfPermission(eventDetails, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(eventDetails, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
     }
     private void requestPermissions()
     {
-        ActivityCompat.requestPermissions(signupActivity, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION }, PERMISSION_ID);
+        ActivityCompat.requestPermissions(eventDetails, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION }, PERMISSION_ID);
     }
 
     private boolean isLocationEnabled()
     {
-        LocationManager locationManager = (LocationManager)signupActivity.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) eventDetails.getSystemService(Context.LOCATION_SERVICE);
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }

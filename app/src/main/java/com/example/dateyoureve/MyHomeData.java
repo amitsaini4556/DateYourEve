@@ -1,12 +1,27 @@
 package com.example.dateyoureve;
 
-import android.net.Uri;
-
 public class MyHomeData {
-    private String title,description,date,venue;
+    private String title,description,date,venue,mode,notes,paid,time,userId,eventId;
     private String image;
 
+
+
     public MyHomeData(){}
+
+    public MyHomeData(String title, String description, String date, String venue, String mode, String notes, String paid, String time, String userId, String eventId, String image) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.venue = venue;
+        this.mode = mode;
+        this.notes = notes;
+        this.paid = paid;
+        this.time = time;
+        this.userId = userId;
+        this.image = image;
+        this.eventId = eventId;
+    }
+
     public MyHomeData(String title, String description, String date, String venue, String image) {
         this.title = title;
         this.description = description;
@@ -53,5 +68,53 @@ public class MyHomeData {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getPaid() {
+        return paid;
+    }
+
+    public void setPaid(String paid) {
+        this.paid = paid;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 }

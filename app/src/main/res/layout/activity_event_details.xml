@@ -34,10 +34,9 @@
             <ImageView
                 android:id="@+id/eventImage"
                 android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:layout_gravity="center"
                 app:srcCompat="@drawable/download" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -5,15 +5,14 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -28,7 +27,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,8 +42,6 @@ import java.util.Objects;
 
 import ru.semkin.yandexplacepicker.PlaceParcelable;
 import ru.semkin.yandexplacepicker.YandexPlacePicker;
-
-import static com.example.dateyoureve.R.color.textcolor;
 
 public class CreateEvent extends AppCompatActivity {
     TextView textView;
@@ -63,12 +59,11 @@ public class CreateEvent extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 22;
     Button btnSelectImage,cancel,create,btnTimePicker;
     TextInputLayout titleEvent,decriptionEvent,timeInputEvent,notes;
-    RadioGroup radioGroupOnOffMode,radioGroupAmPm;
-    CheckBox paidCheckBox;
+    RadioGroup radioGroupOnOffMode;
     FirebaseDatabase mDatabase;
     DatabaseReference databaseReference;
     StorageReference storageReference;
-    String title,description,note,mode,isFree,fees,time,dateEvent;
+    String title,description,note,mode,isFree,time,dateEvent,location;
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,6 +201,7 @@ public class CreateEvent extends AppCompatActivity {
         if ((requestCode == PLACE_PICKER_REQUEST)) {
             if(data != null) {
                 PlaceParcelable place = YandexPlacePicker.getPlace(data);
+                location = place.getAddress();
                 Toast.makeText(this, "You selected: " + place.getClass(), Toast.LENGTH_SHORT).show();
             }
         }
@@ -250,13 +246,19 @@ public class CreateEvent extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            EventDetailsSetter eventDetailsSetter = new EventDetailsSetter(title,description,note,mode,isFree,taskSnapshot.getUploadSessionUri().toString(),dateEvent,time,user.getUid());
-                            String uploadId = databaseReference.push().getKey();
-                            databaseReference.child(title).setValue(eventDetailsSetter);
-                            DatabaseReference userData = FirebaseDatabase.getInstance().getReference("users");
-                            EventIdObj eventIdObj = new EventIdObj(uploadId);
-                            userData.child(user.getUid()).child("createdEvents").child(title).setValue(eventIdObj);
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    String uploadId = databaseReference.push().getKey();
+                                    EventDetailsSetter eventDetailsSetter = new EventDetailsSetter(title,description,note,mode,isFree,uri.toString(),dateEvent,time,location,user.getUid(),uploadId);
+                                    Log.i("test",fileReference.getDownloadUrl().toString());
+                                    databaseReference.child(uploadId).setValue(eventDetailsSetter);
+                                    DatabaseReference userData = FirebaseDatabase.getInstance().getReference("users");
+                                    EventIdObj eventIdObj = new EventIdObj(uploadId);
+                                    userData.child(user.getUid()).child("createdEvents").child(title).setValue(eventIdObj);
+                                }
+                            });
                             progressDialog.dismiss();
                             Toast.makeText(CreateEvent.this, "Event successful created", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(CreateEvent.this,Home.class);
