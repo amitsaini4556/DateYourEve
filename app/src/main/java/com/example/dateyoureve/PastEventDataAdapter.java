@@ -36,10 +36,11 @@ public class PastEventDataAdapter extends RecyclerView.Adapter<PastEventDataAdap
         final PastEventData pastEventDataList = pastEventData.get(position);
         holder.titleView.setText(pastEventDataList.getTitle());
         holder.date.setText(pastEventDataList.getDate());
+        holder.interested.setText(pastEventDataList.getInterested_count());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CreateEvent.class);
+                Intent intent = new Intent(context,InterestedUsersList.class);
                 context.startActivity(intent);
             }
     });
