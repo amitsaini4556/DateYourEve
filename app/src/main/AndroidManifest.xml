@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PastEventsList"></activity>
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
@@ -57,7 +58,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <meta-data android:name="com.google.android.geo.API_KEY"
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAg_q8_CXk_Bah2-VKajdu17eiHCtboDg4" />
     </application>
 

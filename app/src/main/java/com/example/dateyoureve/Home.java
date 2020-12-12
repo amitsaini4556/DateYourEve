@@ -115,6 +115,10 @@ public class Home extends AppCompatActivity {
                 Intent intent=new Intent(this,CreateEvent.class);
                 startActivity(intent);
                 return true;
+            case R.id.past_events:
+                Intent intent1 = new Intent(this,PastEventsList.class);
+                startActivity(intent1);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
