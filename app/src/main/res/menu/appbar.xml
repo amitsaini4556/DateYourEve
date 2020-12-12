@@ -11,5 +11,6 @@
     <item
         android:id="@+id/create_event"
         android:title="Create event" />
-    <item android:title="Past enents" />
+    <item android:title="Past enents"
+        android:id="@+id/past_events"/>
 </menu>
