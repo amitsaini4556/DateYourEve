@@ -8,12 +8,20 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dateyoureve.ui.HomeFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
@@ -56,9 +64,12 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
                 Intent intent = new Intent(context.getContext(), EventDetails.class);
                 intent.putExtra("title", myHomeDataList.getTitle());
                 intent.putExtra("decs", myHomeDataList.getDescription());
-                intent.putExtra("date", myHomeDataList.getDate());
+                intent.putExtra("date", myHomeDataList.getDate() + " || " + myHomeDataList.getTime());
                 intent.putExtra("venue", myHomeDataList.getVenue());
                 intent.putExtra("image", myHomeDataList.getImage());
+                intent.putExtra("note", myHomeDataList.getNotes());
+                intent.putExtra("mode", myHomeDataList.getMode());
+                intent.putExtra("eventId", myHomeDataList.getEventId());
                 context.startActivity(intent);
             }
         });
@@ -72,6 +83,32 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
                 stringMessage = stringMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID;
                 shareIntent.putExtra(Intent.EXTRA_TEXT, stringMessage);
                 context.startActivity(Intent.createChooser(shareIntent,"Share via"));
+            }
+        });
+        holder.itemView.findViewById(R.id.favButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
+                String path = "users/" + mAuth.getUid() + "/FavEvents";
+                DatabaseReference userData = FirebaseDatabase.getInstance().getReference(path);
+                EventIdObj eventIdObj = new EventIdObj(myHomeDataList.getEventId());
+                userData.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.hasChild(myHomeDataList.getEventId()))
+                        {
+                            Toast.makeText(context.getContext(),"Already in Favourite section!",Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            userData.child(myHomeDataList.getEventId()).setValue(eventIdObj);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }

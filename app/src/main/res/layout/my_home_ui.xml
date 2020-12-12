@@ -85,12 +85,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="52dp"
                 android:text="CSE Dept. CTAE Udaipur"
                 android:textColor="@color/textcolor"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/descView"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/textView11"
                 app:layout_constraintVertical_bias="0.131" />

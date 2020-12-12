@@ -1,19 +1,20 @@
 package com.example.dateyoureve;
 
 public class EventDetailsSetter {
-    String title,description,notes,mode,paid,date,image,time,userId;
+    String title,description,notes,mode,date,image,time,userId,venue,eventId;
 
 
-    public EventDetailsSetter(String title, String description, String notes, String mode, String paid, String image, String date, String time, String userId) {
+    public EventDetailsSetter(String title, String description, String notes, String mode, String paid, String image, String date, String time,String venue, String userId, String eventId) {
         this.title = title;
         this.description = description;
         this.notes = notes;
         this.mode = mode;
-        this.paid = paid;
         this.image = image;
         this.date = date;
         this.time = time;
         this.userId = userId;
+        this.venue = venue;
+        this.eventId = eventId;
     }
 
     public String getTitle() {
@@ -48,13 +49,6 @@ public class EventDetailsSetter {
         this.mode = mode;
     }
 
-    public String getPaid() {
-        return paid;
-    }
-
-    public void setPaid(String paid) {
-        this.paid = paid;
-    }
 
     public String getImage() {
         return image;
@@ -86,5 +80,21 @@ public class EventDetailsSetter {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 }

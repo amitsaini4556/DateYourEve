@@ -25,7 +25,7 @@ public class ProfileFragment extends Fragment {
     FloatingActionButton logout;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
-    TextView userName,email,phone;
+    TextView userName,email,phone,createdEvents,interestedEvents;
     ProgressDialog progressDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +40,8 @@ public class ProfileFragment extends Fragment {
         userName = root.findViewById(R.id.userName);
         email = root.findViewById(R.id.textView31);
         phone = root.findViewById(R.id.textView33);
+        createdEvents = root.findViewById(R.id.textView35);
+        interestedEvents = root.findViewById(R.id.textView34);
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(mAuth.getCurrentUser().getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -47,6 +49,8 @@ public class ProfileFragment extends Fragment {
                 userName.setText(snapshot.child("userName").getValue().toString());
                 phone.setText(snapshot.child("phone").getValue().toString());
                 email.setText(snapshot.child("email").getValue().toString());
+                createdEvents.setText("Created Events +" + snapshot.child("createdEvents").getChildrenCount());
+                interestedEvents.setText("Interested Events +" + snapshot.child("InterestedEvents").getChildrenCount());
             }
 
             @Override

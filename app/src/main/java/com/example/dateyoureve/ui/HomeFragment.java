@@ -90,21 +90,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot dataSnapshot : snapshot.getChildren())
-//                {
-//                    myHomeData.add(dataSnapshot.getValue(MyHomeData.class));
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
         myHomeAdapter = new MyHomeAdapter(myHomeData,HomeFragment.this);
         recyclerView.setAdapter(myHomeAdapter);
         return root;
