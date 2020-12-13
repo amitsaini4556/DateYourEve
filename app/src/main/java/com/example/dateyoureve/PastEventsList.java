@@ -42,6 +42,48 @@ public class PastEventsList extends AppCompatActivity {
         databaseReferenceCreated.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    String path = "Events/" + dataSnapshot.getValue().toString();
+                    databaseReferenceEve = FirebaseDatabase.getInstance().getReference(path);
+                    databaseReferenceEve.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            DatabaseReference databaseReferenceCount;
+                            String path1 = "Events/" + dataSnapshot.getValue().toString() + "InterestedPeoples";
+                            databaseReferenceCount= FirebaseDatabase.getInstance().getReference(path1);
+
+
+
+                           databaseReferenceCount.addValueEventListener(new ValueEventListener() {
+                               @Override
+                               public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                   PastEventData obj = snapshot.getValue(PastEventData.class);
+                                   obj.setInterested_count(snapshot.getChildrenCount());
+
+                                   pastEventData.add(obj);
+                               }
+
+                               @Override
+                               public void onCancelled(@NonNull DatabaseError error) {
+
+                               }
+                           });
+
+
+
+                            //pastEventData.add(snapshot.getValue(PastEventData.class));
+                            myAdapter.notifyDataSetChanged();
+                            Log.i("test",snapshot.getValue().toString());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
             }
 
             @Override
@@ -64,9 +106,6 @@ public class PastEventsList extends AppCompatActivity {
 
             }
         });
-       pastEventData.add(new PastEventData("mid terms","10/01/2020","10"));
-        pastEventData.add(new PastEventData("Projects","20/65/1523","20"));
-        pastEventData.add(new PastEventData("Office Works","32/12/2021","40"));
         myAdapter = new PastEventDataAdapter(pastEventData,PastEventsList.this);
         recyclerView.setAdapter(myAdapter);
     }
