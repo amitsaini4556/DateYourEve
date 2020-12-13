@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -30,8 +29,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -153,7 +155,7 @@ public class CreateEvent extends AppCompatActivity {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                     if((date>cdate && month == cmonth && year==cyear) || (date == cdate && month > cmonth && year==cyear) ||(date == cdate && month == cmonth && year > cyear))
-                    textView.setText(date+"/"+month+"/"+year);
+                    textView.setText(date+"/"+month+1+"/"+year);
                     else
                         Toast.makeText(CreateEvent.this, "Please enter valid date", Toast.LENGTH_SHORT).show();
                 }
@@ -251,12 +253,21 @@ public class CreateEvent extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     String uploadId = databaseReference.push().getKey();
-                                    EventDetailsSetter eventDetailsSetter = new EventDetailsSetter(title,description,note,mode,isFree,uri.toString(),dateEvent,time,location,user.getUid(),uploadId);
-                                    Log.i("test",fileReference.getDownloadUrl().toString());
-                                    databaseReference.child(uploadId).setValue(eventDetailsSetter);
                                     DatabaseReference userData = FirebaseDatabase.getInstance().getReference("users");
                                     EventIdObj eventIdObj = new EventIdObj(uploadId);
                                     userData.child(user.getUid()).child("createdEvents").child(title).setValue(eventIdObj);
+                                    userData.child(user.getUid()).child("phone").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            EventDetailsSetter eventDetailsSetter = new EventDetailsSetter(title,description,note,mode,isFree,uri.toString(),dateEvent,time,location,user.getUid(),uploadId,snapshot.getValue().toString());
+                                            databaseReference.child(uploadId).setValue(eventDetailsSetter);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             });
                             progressDialog.dismiss();

@@ -83,6 +83,8 @@ public class FavouriteDataAdapter extends RecyclerView.Adapter<FavouriteDataAdap
                                 DatabaseReference userData = FirebaseDatabase.getInstance().getReference(path);
                                 userData.child(myHomeDataList.getEventId()).removeValue();
                                 Toast.makeText(context.getActivity(),"Delete",Toast.LENGTH_LONG).show();
+                                myHomeData.remove(position);
+                                notifyItemRemoved(position);
                                 dialogInterface.cancel();
                             }
                         })
