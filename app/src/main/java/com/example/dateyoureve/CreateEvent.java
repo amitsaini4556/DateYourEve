@@ -60,7 +60,11 @@ public class CreateEvent extends AppCompatActivity {
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
     Button btnSelectImage,cancel,create,btnTimePicker;
-    TextInputLayout titleEvent,decriptionEvent,timeInputEvent,notes;
+    TextInputLayout titleEvent;
+    TextInputLayout decriptionEvent;
+    TextInputLayout timeInputEvent;
+    TextInputLayout notes;
+    String venue;
     RadioGroup radioGroupOnOffMode;
     FirebaseDatabase mDatabase;
     DatabaseReference databaseReference;
@@ -113,7 +117,8 @@ public class CreateEvent extends AppCompatActivity {
             note = notes.getEditText().getText().toString();
             time = timeInputEvent.getEditText().getText().toString();
             dateEvent = textView.getText().toString();
-            if(!title.isEmpty() && !description.isEmpty() && !note.isEmpty())
+            venue = selectvenue.getText().toString();
+            if(!title.isEmpty() && !description.isEmpty() && !note.isEmpty() && !time.isEmpty() && !dateEvent.isEmpty() && !venue.isEmpty())
             {
                 progressDialog.show();
                 uploadImage();
@@ -154,6 +159,7 @@ public class CreateEvent extends AppCompatActivity {
             DatePickerDialog datePickerDialog =new DatePickerDialog(CreateEvent.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+
                     if((date>cdate && month == cmonth && year==cyear) || (date == cdate && month > cmonth && year==cyear) ||(date == cdate && month == cmonth && year > cyear))
                     textView.setText(date+"/"+month+1+"/"+year);
                     else
@@ -203,7 +209,8 @@ public class CreateEvent extends AppCompatActivity {
         if ((requestCode == PLACE_PICKER_REQUEST)) {
             if(data != null) {
                 PlaceParcelable place = YandexPlacePicker.getPlace(data);
-                location = place.getAddress();
+                location =place.getName()+ place.getAddress();
+                selectvenue.setText(place.getName()+place.getAddress());
                 Toast.makeText(this, "You selected: " + place.getClass(), Toast.LENGTH_SHORT).show();
             }
         }
@@ -255,7 +262,7 @@ public class CreateEvent extends AppCompatActivity {
                                     String uploadId = databaseReference.push().getKey();
                                     DatabaseReference userData = FirebaseDatabase.getInstance().getReference("users");
                                     EventIdObj eventIdObj = new EventIdObj(uploadId);
-                                    userData.child(user.getUid()).child("createdEvents").child(title).setValue(eventIdObj);
+                                    userData.child(user.getUid()).child("createdEvents").child(uploadId).setValue(eventIdObj);
                                     userData.child(user.getUid()).child("phone").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {

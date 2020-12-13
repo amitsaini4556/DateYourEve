@@ -1,8 +1,13 @@
 package com.example.dateyoureve;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class EventDetailsSetter {
     String title,description,notes,mode,date,image,time,userId,venue,eventId,phone;
+    public  EventDetailsSetter(){
 
+    }
 
     public EventDetailsSetter(String title, String description, String notes, String mode, String paid, String image, String date, String time,String venue, String userId, String eventId, String phone) {
         this.title = title;

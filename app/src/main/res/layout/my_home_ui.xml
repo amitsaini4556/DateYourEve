@@ -82,12 +82,13 @@
 
             <TextView
                 android:id="@+id/venueView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="52dp"
                 android:text="CSE Dept. CTAE Udaipur"
                 android:textColor="@color/textcolor"
+                android:gravity="right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/descView"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
