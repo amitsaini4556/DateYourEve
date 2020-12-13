@@ -1,14 +1,14 @@
 package com.example.dateyoureve;
 
 public class MyHomeData {
-    private String title,description,date,venue,mode,notes,paid,time,userId,eventId;
+    private String title,description,date,venue,mode,notes,paid,time,userId,eventId,phone;
     private String image;
 
 
 
     public MyHomeData(){}
 
-    public MyHomeData(String title, String description, String date, String venue, String mode, String notes, String paid, String time, String userId, String eventId, String image) {
+    public MyHomeData(String title, String description, String date, String venue, String mode, String notes, String paid, String time, String userId, String eventId, String image,String phone) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -20,6 +20,7 @@ public class MyHomeData {
         this.userId = userId;
         this.image = image;
         this.eventId = eventId;
+        this.phone = phone;
     }
 
     public MyHomeData(String title, String description, String date, String venue, String image) {
@@ -116,5 +117,13 @@ public class MyHomeData {
 
     public void setEventId(String eventId) {
         this.eventId = eventId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -36,7 +36,7 @@ public class EventDetails extends AppCompatActivity {
     ImageView imageView;
     FusedLocationProviderClient mFusedLocationClient;
     Double latitude, longit;
-    String country,locality,addr,phone;
+    String country,locality,addr;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
     ProgressBar progressBar;
@@ -137,23 +137,10 @@ public class EventDetails extends AppCompatActivity {
         callbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth = FirebaseAuth.getInstance();
-                databaseReference = FirebaseDatabase.getInstance().getReference("users").child(mAuth.getCurrentUser().getUid());
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        phone = snapshot.child("phone").getValue().toString();
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:"+ phone));
-                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getApplicationContext().startActivity(callIntent);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+ getIntent().getStringExtra("phone")));
+                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(callIntent);
             }
         });
     }
