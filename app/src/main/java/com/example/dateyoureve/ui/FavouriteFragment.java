@@ -44,30 +44,30 @@ public class FavouriteFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         myHomeData = new ArrayList<MyHomeData>();
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        path = "users/" + mAuth.getUid() + "/FavEvents";
-        databaseReferenceFav = FirebaseDatabase.getInstance().getReference(path);
-        databaseReferenceFav.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                for(DataSnapshot dataFav : snapshot.getChildren())
-                {
-                    String path = "Events/" + dataFav.getValue().toString();
-                    databaseReferenceEve = FirebaseDatabase.getInstance().getReference(path);
-                    databaseReferenceEve.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            myHomeData.add(snapshot.getValue(MyHomeData.class));
+                path = "users/" + mAuth.getUid() + "/FavEvents";
+                databaseReferenceFav = FirebaseDatabase.getInstance().getReference(path);
+                databaseReferenceFav.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        for(DataSnapshot dataFav : snapshot.getChildren())
+                        {
+                            String path = "Events/" + dataFav.getValue().toString();
+                            databaseReferenceEve = FirebaseDatabase.getInstance().getReference(path);
+                            databaseReferenceEve.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    myHomeData.add(snapshot.getValue(MyHomeData.class));
+                                    myHomeAdapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                             myHomeAdapter.notifyDataSetChanged();
+                            Log.i("test",dataFav.getValue().toString());
                         }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    myHomeAdapter.notifyDataSetChanged();
-                    Log.i("test",dataFav.getValue().toString());
-                }
             }
 
             @Override

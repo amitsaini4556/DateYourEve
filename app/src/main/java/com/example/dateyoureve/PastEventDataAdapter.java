@@ -41,6 +41,7 @@ public class PastEventDataAdapter extends RecyclerView.Adapter<PastEventDataAdap
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,InterestedUsersList.class);
+                intent.putExtra("eventId",pastEventDataList.getEventId());
                 context.startActivity(intent);
             }
     });

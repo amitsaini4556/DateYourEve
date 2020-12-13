@@ -49,32 +49,10 @@ public class PastEventsList extends AppCompatActivity {
                     databaseReferenceEve.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            DatabaseReference databaseReferenceCount;
-                            String path1 = "Events/" + dataSnapshot.getValue().toString() + "InterestedPeoples";
-                            databaseReferenceCount= FirebaseDatabase.getInstance().getReference(path1);
 
-
-
-                           databaseReferenceCount.addValueEventListener(new ValueEventListener() {
-                               @Override
-                               public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                   PastEventData obj = snapshot.getValue(PastEventData.class);
-                                   obj.setInterested_count(snapshot.getChildrenCount());
-
-                                   pastEventData.add(obj);
-                               }
-
-                               @Override
-                               public void onCancelled(@NonNull DatabaseError error) {
-
-                               }
-                           });
-
-
-
-                            //pastEventData.add(snapshot.getValue(PastEventData.class));
+                            pastEventData.add(snapshot.getValue(PastEventData.class));
                             myAdapter.notifyDataSetChanged();
-                            Log.i("test",snapshot.getValue().toString());
+
                         }
 
                         @Override

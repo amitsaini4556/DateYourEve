@@ -70,6 +70,7 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
                 intent.putExtra("note", myHomeDataList.getNotes());
                 intent.putExtra("mode", myHomeDataList.getMode());
                 intent.putExtra("eventId", myHomeDataList.getEventId());
+                intent.putExtra("phone", myHomeDataList.getPhone());
                 context.startActivity(intent);
             }
         });
