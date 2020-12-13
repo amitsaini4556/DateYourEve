@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -93,6 +94,7 @@ public class EventDetails extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                udateEvent();
                 DatabaseReference user = FirebaseDatabase.getInstance().getReference("users");
                 EventIdObj eventIdObj = new EventIdObj(getIntent().getStringExtra("eventId"));
                 user.child(auth.getUid()).child("InterestedEvents").child(getIntent().getStringExtra("eventId")).setValue(eventIdObj);
@@ -154,5 +156,13 @@ public class EventDetails extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public synchronized void udateEvent() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        User userId = new User(user.getUid());
+        DatabaseReference data = FirebaseDatabase.getInstance().getReference("Events");
+        data.child(getIntent().getStringExtra("eventId")).child("InterestedPeoples").child(user.getUid()).setValue(userId);
+        Log.i("test",getIntent().getStringExtra("eventId"));
     }
 }
