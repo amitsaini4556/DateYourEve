@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InterestedUsersList"></activity>
+        <activity android:name=".InterestedUsersList"
+            android:parentActivityName=".PastEventsList"
+            />
         <activity
             android:name=".PastEventsList"
             android:parentActivityName=".Home" />

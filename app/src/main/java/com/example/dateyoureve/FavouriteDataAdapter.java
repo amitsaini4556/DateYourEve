@@ -66,6 +66,7 @@ public class FavouriteDataAdapter extends RecyclerView.Adapter<FavouriteDataAdap
                 intent.putExtra("note", myHomeDataList.getNotes());
                 intent.putExtra("mode", myHomeDataList.getMode());
                 intent.putExtra("eventId", myHomeDataList.getEventId());
+                intent.putExtra("phone", myHomeDataList.getPhone());
                 context.startActivity(intent);
             }
         });
@@ -83,8 +84,14 @@ public class FavouriteDataAdapter extends RecyclerView.Adapter<FavouriteDataAdap
                                 DatabaseReference userData = FirebaseDatabase.getInstance().getReference(path);
                                 userData.child(myHomeDataList.getEventId()).removeValue();
                                 Toast.makeText(context.getActivity(),"Delete",Toast.LENGTH_LONG).show();
-                                myHomeData.remove(position);
-                                notifyItemRemoved(position);
+                                try{
+                                    myHomeData.remove(position);
+                                    notifyItemRemoved(position);
+                                }catch (Exception e)
+                                {
+
+                                }
+
                                 dialogInterface.cancel();
                             }
                         })

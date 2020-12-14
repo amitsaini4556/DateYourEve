@@ -156,12 +156,12 @@ public class CreateEvent extends AppCompatActivity {
             cmonth=calendar.get(Calendar.MONTH);
             cyear=calendar.get(Calendar.YEAR);
 
-            DatePickerDialog datePickerDialog =new DatePickerDialog(CreateEvent.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+            DatePickerDialog datePickerDialog =new DatePickerDialog(CreateEvent.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int date) {
 
                     if((date>cdate && month == cmonth && year==cyear) || (date == cdate && month > cmonth && year==cyear) ||(date == cdate && month == cmonth && year > cyear))
-                    textView.setText(date+"/"+month+1+"/"+year);
+                    textView.setText(date+"/"+(month+1)+"/"+year);
                     else
                         Toast.makeText(CreateEvent.this, "Please enter valid date", Toast.LENGTH_SHORT).show();
                 }
@@ -210,7 +210,7 @@ public class CreateEvent extends AppCompatActivity {
             if(data != null) {
                 PlaceParcelable place = YandexPlacePicker.getPlace(data);
                 location =place.getName()+ place.getAddress();
-                selectvenue.setText(place.getName()+place.getAddress());
+                selectvenue.setText(place.getName() + " " + place.getAddress());
                 Toast.makeText(this, "You selected: " + place.getClass(), Toast.LENGTH_SHORT).show();
             }
         }

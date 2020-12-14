@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,9 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
     List<MyHomeData> myHomeData;
     List<MyHomeData> myHomeDataFull;
     HomeFragment context;
+    FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
+    String path = "users/" + mAuth.getUid() + "FavEvents";
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(path);
     FirebaseStorage storage  = FirebaseStorage.getInstance();
     public MyHomeAdapter(List<MyHomeData> myHomeData, HomeFragment homeFragment) {
         this.myHomeData = myHomeData;
@@ -54,6 +58,20 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
         holder.descriptionView.setText(myHomeDataList.getDescription());
         holder.dateView.setText(myHomeDataList.getDate());
         holder.venueView.setText(myHomeDataList.getVenue());
+        synchronized (context) {databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChild(myHomeDataList.getEventId()))
+                {
+                    holder.imageButton.setImageResource(R.drawable.ic_favorite_primary);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }); }
         Glide.with(context)
                 .load(myHomeDataList.getImage())
                 .into(holder.eventImage);
@@ -98,10 +116,11 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.hasChild(myHomeDataList.getEventId()))
                         {
-                            Toast.makeText(context.getContext(),"Already in Favourite section!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getActivity(),"Already in Favourite section!",Toast.LENGTH_LONG).show();
                         }
                         else{
                             userData.child(myHomeDataList.getEventId()).setValue(eventIdObj);
+                            holder.imageButton.setImageResource(R.drawable.ic_favorite_primary);
                         }
                     }
 
@@ -121,6 +140,7 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView eventImage;
+        ImageButton imageButton;
         TextView titleView, descriptionView, dateView, venueView;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -129,6 +149,7 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
             descriptionView = itemView.findViewById(R.id.descView);
             dateView = itemView.findViewById(R.id.dateView);
             venueView = itemView.findViewById(R.id.venueView);
+            imageButton = itemView.findViewById(R.id.favButton);
         }
     }
 

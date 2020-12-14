@@ -1,5 +1,8 @@
 package com.example.dateyoureve;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class MyHomeData {
     private String title,description,date,venue,mode,notes,paid,time,userId,eventId,phone;
     private String image;

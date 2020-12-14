@@ -5,6 +5,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class PastEventData {
 
+    String title,date,eventId,interested_count;
+
     public String getEventId() {
         return eventId;
     }
@@ -16,7 +18,7 @@ public class PastEventData {
     public PastEventData(){
 
     }
-    public PastEventData(String title, String date, long interested_count,String eventId) {
+    public PastEventData(String title, String date, String interested_count,String eventId) {
         this.title = title;
         this.date = date;
         this.interested_count = interested_count;
@@ -32,12 +34,9 @@ public class PastEventData {
         return date;
     }
 
-    public long getInterested_count() {
+    public String getInterested_count() {
         return interested_count;
     }
-
-    String title,date,eventId;
-    long interested_count;
 
     public void setTitle(String title) {
         this.title = title;
@@ -47,7 +46,7 @@ public class PastEventData {
         this.date = date;
     }
 
-    public void setInterested_count(long interested_count) {
+    public void setInterested_count(String interested_count) {
         this.interested_count = interested_count;
     }
 }
