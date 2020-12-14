@@ -40,4 +40,10 @@
         <item name="boxStrokeColor">@drawable/custom_box_color</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:layout_marginEnd">2dp</item>
+    </style>
+
 </resources>

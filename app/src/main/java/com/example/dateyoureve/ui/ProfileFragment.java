@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class ProfileFragment extends Fragment {
     FloatingActionButton logout;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
     TextView userName,email,phone,createdEvents,interestedEvents;
     ProgressDialog progressDialog;
     @Override
@@ -35,6 +37,8 @@ public class ProfileFragment extends Fragment {
         progressDialog.setMessage("Details loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
+        progressBar = root.findViewById(R.id.loaderPro);
+        progressBar.setVisibility(View.VISIBLE);
         mAuth = FirebaseAuth.getInstance();
         logout = root.findViewById(R.id.logout);
         userName = root.findViewById(R.id.userName);
@@ -46,6 +50,7 @@ public class ProfileFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                progressBar.setVisibility(View.GONE);
                 userName.setText(snapshot.child("userName").getValue().toString());
                 phone.setText(snapshot.child("phone").getValue().toString());
                 email.setText(snapshot.child("email").getValue().toString());

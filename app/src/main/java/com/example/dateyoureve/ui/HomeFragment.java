@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private List<MyHomeData> myHomeData;
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
     String s1,s2,s3,s4,s5;
     public HomeFragment(String s1, String s2, String s3, String s4, String s5){
         this.s1=s1;
@@ -56,8 +58,8 @@ public class HomeFragment extends Fragment {
                 //textView.setText(s);
             }
         });
-
-
+        progressBar = root.findViewById(R.id.loader);
+        progressBar.setVisibility(View.VISIBLE);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -67,6 +69,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 myHomeData.add(snapshot.getValue(MyHomeData.class));
+                progressBar.setVisibility(View.GONE);
                 myHomeAdapter.notifyDataSetChanged();
             }
 

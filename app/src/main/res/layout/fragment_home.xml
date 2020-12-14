@@ -17,4 +17,12 @@
             android:layout_margin="2dp"
             android:background="@color/card_backgrond"
             />
+
+        <ProgressBar
+            android:id="@+id/loader"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 </FrameLayout>

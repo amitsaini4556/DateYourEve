@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,12 +35,18 @@ public class FavouriteFragment extends Fragment {
     DatabaseReference databaseReferenceFav,databaseReferenceEve;
     FavouriteDataAdapter myHomeAdapter;
     FirebaseUser mAuth;
+    ProgressBar progressBar;
     String path;
+    TextView textView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_favourite, container, false);
+        progressBar = root.findViewById(R.id.progressBarFav);
+        progressBar.setVisibility(View.VISIBLE);
+        textView = root.findViewById(R.id.oopsMessageFav);
+        textView.setVisibility(View.GONE);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerViewFav);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -68,6 +76,7 @@ public class FavouriteFragment extends Fragment {
                             myHomeAdapter.notifyDataSetChanged();
                             Log.i("test",dataFav.getValue().toString());
                         }
+                        progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -90,35 +99,10 @@ public class FavouriteFragment extends Fragment {
 
             }
         });
-//        databaseReferenceFav.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot dataFav : snapshot.getChildren())
-//                {
-//                    String path = "Events/" + dataFav.child("eventId").getValue().toString();
-//                    databaseReferenceEve = FirebaseDatabase.getInstance().getReference(path);
-//                    databaseReferenceEve.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            myHomeData.add(snapshot.getValue(MyHomeData.class));
-//                            myHomeAdapter.notifyDataSetChanged();
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                    myHomeAdapter.notifyDataSetChanged();
-//                    Log.i("test",dataFav.child("eventId").getValue().toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        if(myHomeData.isEmpty())
+        {
+            progressBar.setVisibility(View.GONE);
+        }
         myHomeAdapter = new FavouriteDataAdapter(myHomeData,FavouriteFragment.this);
         recyclerView.setAdapter(myHomeAdapter);
         return root;

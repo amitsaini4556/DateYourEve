@@ -2,68 +2,43 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppTheme.NoActionBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RecentFragment"
-    android:background="@color/backgroundcolor"
-    style="@style/AppTheme.NoActionBar"
     android:layout_marginTop="?actionBarSize"
-    android:layout_marginBottom="?actionBarSize">
+    android:layout_marginBottom="?actionBarSize"
+    android:background="@color/backgroundcolor"
+    tools:context=".ui.RecentFragment">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRegister"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/card_backgrond">
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:background="@color/card_backgrond"
+        tools:layout_editor_absoluteX="-53dp"
+        tools:layout_editor_absoluteY="2dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
+    <ProgressBar
+        android:id="@+id/progressBarRegister"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewRegister"
+        app:layout_constraintEnd_toStartOf="@+id/recyclerViewRegister"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/recyclerViewRegister"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewRegister" />
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="116dp"
-                android:layout_height="97dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/download"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.666" />
+    <TextView
+        android:id="@+id/textViewRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/recyclerViewRegister"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/recyclerViewRegister"
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewRegister" />
 
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:textColor="@color/textcolor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.082"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="subtitle"
-                android:singleLine="true"
-                android:textColor="@color/textcolor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView25"
-                app:layout_constraintTop_toBottomOf="@+id/textView25" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
