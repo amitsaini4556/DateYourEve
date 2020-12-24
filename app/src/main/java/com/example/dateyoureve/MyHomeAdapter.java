@@ -161,14 +161,14 @@ public class MyHomeAdapter extends RecyclerView.Adapter<MyHomeAdapter.ViewHolder
     private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString().toLowerCase().trim();
+                String charString = charSequence.toString().toUpperCase().trim();
                 List<MyHomeData> contactListFiltered = new ArrayList<MyHomeData>();
                 if (charSequence == null || charSequence.length() == 0) {
                     contactListFiltered.addAll(myHomeDataFull);
                 } else {
                     for (MyHomeData row : myHomeDataFull) {
-                        if ((row.getTitle().toLowerCase()).contains(charString)) {
-                            contactListFiltered.add(new MyHomeData(row.getTitle(),row.getDescription(),row.getDate(),row.getVenue(),row.getImage()));
+                        if ((row.getTitle().toUpperCase()).contains(charString)) {
+                            contactListFiltered.add(row);
                         }
                     }
                 }

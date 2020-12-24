@@ -11,14 +11,13 @@ public class MyHomeData {
 
     public MyHomeData(){}
 
-    public MyHomeData(String title, String description, String date, String venue, String mode, String notes, String paid, String time, String userId, String eventId, String image,String phone) {
+    public MyHomeData(String title, String description, String date, String venue, String mode, String notes, String time, String userId, String eventId, String image,String phone) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.venue = venue;
         this.mode = mode;
         this.notes = notes;
-        this.paid = paid;
         this.time = time;
         this.userId = userId;
         this.image = image;

@@ -209,7 +209,7 @@ public class CreateEvent extends AppCompatActivity {
         if ((requestCode == PLACE_PICKER_REQUEST)) {
             if(data != null) {
                 PlaceParcelable place = YandexPlacePicker.getPlace(data);
-                location =place.getName()+ place.getAddress();
+                location =place.getName() + " " + place.getAddress();
                 selectvenue.setText(place.getName() + " " + place.getAddress());
                 Toast.makeText(this, "You selected: " + place.getClass(), Toast.LENGTH_SHORT).show();
             }

@@ -87,19 +87,27 @@ public class UserLocation extends EventDetails {
         mLocationRequest.setFastestInterval(0);
         mLocationRequest.setNumUpdates(1);
         eventDetails.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(eventDetails);
-
         eventDetails.mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
     }
 
     private LocationCallback mLocationCallback = new LocationCallback() {
-
         @Override
         public void onLocationResult(
                 LocationResult locationResult)
         {
             Location mLastLocation = locationResult.getLastLocation();
-            eventDetails.latitude = mLastLocation.getLatitude();
-            eventDetails.longit = mLastLocation.getLongitude();
+            Geocoder geocoder = new Geocoder(eventDetails, Locale.getDefault());
+            List<Address> address = null;
+            try {
+                address = geocoder.getFromLocation(mLastLocation.getLatitude(),mLastLocation.getLongitude(),1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            eventDetails.latitude = address.get(0).getLatitude();
+            eventDetails.longit = address.get(0).getLongitude();
+            eventDetails.country = address.get(0).getCountryName();
+            eventDetails.locality = address.get(0).getLocality();
+            eventDetails.addr = address.get(0).getAddressLine(0);
         }
     };
 
@@ -141,4 +149,5 @@ public class UserLocation extends EventDetails {
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
 }
