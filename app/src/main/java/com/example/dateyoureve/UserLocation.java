@@ -3,11 +3,15 @@ package com.example.dateyoureve;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Looper;
+import android.provider.Settings;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -16,12 +20,16 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
-public class UserLocation extends EventDetails implements LocationListener {
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+public class UserLocation extends EventDetails {
     EventDetails eventDetails;
     int PERMISSION_ID = 44;
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
     UserLocation(EventDetails eventDetails){
         this.eventDetails = eventDetails;
         getLastLocation();
@@ -29,47 +37,45 @@ public class UserLocation extends EventDetails implements LocationListener {
     @SuppressLint("MissingPermission")
     public void getLastLocation()
     {
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-//        if (checkPermissions()) {
-//            if (isLocationEnabled()) {
-//                eventDetails.mFusedLocationClient.getLastLocation().addOnCompleteListener(
-//                        new OnCompleteListener<Location>() {
-//
-//                            @Override
-//                            public void onComplete(
-//                                    @NonNull Task<Location> task)
-//                            {
-//                                Location location = task.getResult();
-//                                if (location == null) {
-//                                    requestNewLocationData();
-//                                }
-//                                else {
-//                                    try {
-//                                        Geocoder geocoder = new Geocoder(eventDetails, Locale.getDefault());
-//                                        List<Address> address = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-//                                        eventDetails.latitude = address.get(0).getLatitude();
-//                                        eventDetails.longit = address.get(0).getLongitude();
-//                                        eventDetails.country = address.get(0).getCountryName();
-//                                        eventDetails.locality = address.get(0).getLocality();
-//                                        eventDetails.addr = address.get(0).getAddressLine(0);
-//                                    } catch (IOException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }
-//                        });
-//            }
-//
-//            else {
-//                Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//                eventDetails.startActivity(intent);
-//            }
-//        }
-//        else {
-//            requestPermissions();
-//        }
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                eventDetails.mFusedLocationClient.getLastLocation().addOnCompleteListener(
+                        new OnCompleteListener<Location>() {
+
+                            @Override
+                            public void onComplete(
+                                    @NonNull Task<Location> task)
+                            {
+                                Location location = task.getResult();
+                                if (location == null) {
+                                    requestNewLocationData();
+                                }
+                                else {
+                                    try {
+                                        Geocoder geocoder = new Geocoder(eventDetails, Locale.getDefault());
+                                        List<Address> address = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                                        eventDetails.latitude = address.get(0).getLatitude();
+                                        eventDetails.longit = address.get(0).getLongitude();
+                                        eventDetails.country = address.get(0).getCountryName();
+                                        eventDetails.locality = address.get(0).getLocality();
+                                        eventDetails.addr = address.get(0).getAddressLine(0);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+            }
+
+            else {
+                Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                eventDetails.startActivity(intent);
+            }
+        }
+        else {
+            requestPermissions();
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -81,19 +87,27 @@ public class UserLocation extends EventDetails implements LocationListener {
         mLocationRequest.setFastestInterval(0);
         mLocationRequest.setNumUpdates(1);
         eventDetails.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(eventDetails);
-
         eventDetails.mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
     }
 
     private LocationCallback mLocationCallback = new LocationCallback() {
-
         @Override
         public void onLocationResult(
                 LocationResult locationResult)
         {
             Location mLastLocation = locationResult.getLastLocation();
-            eventDetails.latitude = mLastLocation.getLatitude();
-            eventDetails.longit = mLastLocation.getLongitude();
+            Geocoder geocoder = new Geocoder(eventDetails, Locale.getDefault());
+            List<Address> address = null;
+            try {
+                address = geocoder.getFromLocation(mLastLocation.getLatitude(),mLastLocation.getLongitude(),1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            eventDetails.latitude = address.get(0).getLatitude();
+            eventDetails.longit = address.get(0).getLongitude();
+            eventDetails.country = address.get(0).getCountryName();
+            eventDetails.locality = address.get(0).getLocality();
+            eventDetails.addr = address.get(0).getAddressLine(0);
         }
     };
 
@@ -136,18 +150,4 @@ public class UserLocation extends EventDetails implements LocationListener {
 
     }
 
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        eventDetails.addr = String.valueOf(location.getLatitude());
-    }
-
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-
-    }
 }
