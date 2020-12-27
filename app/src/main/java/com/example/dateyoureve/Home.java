@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -33,10 +34,21 @@ public class Home extends AppCompatActivity {
     public static final int RequestPermissionCode = 7;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
+    boolean isDarkModeOn;
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+//        sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+//        editor = sharedPreferences.edit();
+//        isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+//        if (isDarkModeOn){
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        }
         if (isOnline()) {
             if(CheckingPermissionIsEnabledOrNot())
             {
@@ -104,7 +116,6 @@ public class Home extends AppCompatActivity {
                 }, RequestPermissionCode);
 
     }
-
     // Calling override method.
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {

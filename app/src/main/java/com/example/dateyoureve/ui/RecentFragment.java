@@ -1,7 +1,6 @@
 package com.example.dateyoureve.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,9 +63,10 @@ public class RecentFragment extends Fragment {
                     databaseReferenceEve.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            myHomeData.add(snapshot.getValue(MyHomeData.class));
-                            registeredEventsAdapter.notifyDataSetChanged();
-                            Log.i("test in side snapshot value",snapshot.getValue().toString());
+                            if(snapshot.exists()) {
+                                myHomeData.add(snapshot.getValue(MyHomeData.class));
+                                registeredEventsAdapter.notifyDataSetChanged();
+                            }
                         }
 
                         @Override
@@ -74,7 +74,6 @@ public class RecentFragment extends Fragment {
 
                         }
                     });
-                    Log.i("test",dataFav.getValue().toString());
                 }
                 progressBar.setVisibility(View.GONE);
             }
