@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,9 +26,6 @@ public class SignupActivity extends AppCompatActivity{
     TextInputLayout textInputPassword;
     TextInputLayout textInputUser;
     TextInputLayout textInputPhone;
-    Button btnToggleDark;
-    Double latitude, longit;
-    String country,locality,addr;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseReference;
@@ -49,8 +45,7 @@ public class SignupActivity extends AppCompatActivity{
         mDatabaseReference = mDatabase.getReference("users");
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        btnToggleDark  = findViewById(R.id.darkmode);
-        DarkMode darkMode = new DarkMode(this);
+        //DarkMode darkMode = new DarkMode(this);
 
         textInputEmail = findViewById(R.id.text_input_email);
         textInputPassword = findViewById(R.id.text_input_password);

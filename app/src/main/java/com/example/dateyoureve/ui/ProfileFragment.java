@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
     FloatingActionButton logout;
+    public FloatingActionButton btnToggleDark;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
     ProgressBar progressBar;
