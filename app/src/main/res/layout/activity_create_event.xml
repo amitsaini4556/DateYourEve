@@ -22,6 +22,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
             android:hint="Title"
+            android:textColor="@color/textcolor"
             android:textColorHint="@color/hintcolor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -32,6 +33,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/textcolor"
                 android:singleLine="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -53,6 +55,7 @@
             <com.google.android.material.textfield.TextInputEditText
 
                 android:layout_width="match_parent"
+                android:textColor="@color/textcolor"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine" />
 
@@ -157,7 +160,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="232dp"
             android:layout_height="60dp"
+            android:textColor="@color/textcolor"
             android:layout_marginStart="16dp"
+            android:textColorHint="@color/hintcolor"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="@+id/radioGroupEventOnOff"
             app:layout_constraintHorizontal_bias="0.168"
@@ -168,6 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:hint="Time"
+                android:textColor="@color/textcolor"
                 android:inputType="time"
                 android:textColorHint="@color/hintcolor" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -219,6 +225,7 @@
             android:layout_marginEnd="16dp"
             android:hint="Additional information"
             android:textColorHint="@color/hintcolor"
+            android:textColor="@color/textcolor"
             app:layout_constraintEnd_toEndOf="@+id/radioGroupEventOnOff"
             app:layout_constraintStart_toStartOf="@+id/timeInputEvent"
             app:layout_constraintTop_toBottomOf="@+id/timeInputEvent">
@@ -227,6 +234,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/textcolor"
                 android:inputType="textMultiLine"/>
 
         </com.google.android.material.textfield.TextInputLayout>
