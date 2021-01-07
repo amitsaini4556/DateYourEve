@@ -55,4 +55,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     implementation 'com.polyak:icon-switch:1.0.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
 }
