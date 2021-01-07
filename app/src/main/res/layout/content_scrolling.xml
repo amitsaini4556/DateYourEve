@@ -33,10 +33,10 @@
             android:layout_width="384dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:justificationMode="inter_word"
             android:paddingRight="10dp"
             android:text="Other than technical experiences, being at the forefront of organizing many events in college has exposed Amit to the management field. Also, he is an active volunteer at NSS. Amit is the overall coordinator of Ecell-CTAE and also a part of the programming club."
             android:textColor="@color/textcolor"
-            android:justificationMode="inter_word"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView19"
@@ -47,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:textColor="@color/textcolor"
             android:text="Date, Time, Venue"
-            android:textStyle="bold"
+            android:textColor="@color/textcolor"
             android:textSize="18dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textView19"
             app:layout_constraintTop_toBottomOf="@+id/decsView" />
 
@@ -59,8 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="@color/textcolor"
             android:text="24 Oct 2020 || CSE Department CTAE college Udaipur"
+            android:textColor="@color/textcolor"
             app:layout_constraintStart_toStartOf="@+id/textView20"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -69,10 +69,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:textColor="@color/textcolor"
             android:text="Please Note"
-            android:textStyle="bold"
+            android:textColor="@color/textcolor"
             android:textSize="18dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/dateVenue"
             app:layout_constraintTop_toBottomOf="@+id/dateVenue" />
 
@@ -93,48 +93,64 @@
             android:layout_width="409dp"
             android:layout_height="80dp"
             android:layout_marginTop="24dp"
+            app:cardBackgroundColor="@color/card_backgrond"
             app:layout_constraintEnd_toEndOf="@+id/textView19"
             app:layout_constraintStart_toStartOf="@+id/notesView"
-            app:layout_constraintTop_toBottomOf="@+id/notesView"
-            app:cardBackgroundColor="@color/card_backgrond">
-                <android.widget.Button
-                    android:layout_margin="15dp"
-                    android:id="@+id/call"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="left"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@color/textcolor"
-                    android:background="@drawable/transparent_button"
-                    android:text="CALL" />
+            app:layout_constraintTop_toBottomOf="@+id/notesView">
 
-                <android.widget.Button
-                    android:id="@+id/direction"
-                    android:layout_margin="15dp"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right"
-                    android:textColor="@color/textcolor"
-                    android:background="@drawable/transparent_button"
-                    android:text="Direction" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="409dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="@+id/card1"
-            app:layout_constraintStart_toStartOf="@+id/card1"
-            app:layout_constraintTop_toBottomOf="@+id/card1"
-            app:cardBackgroundColor="@color/card_backgrond">
-            <Button
-                android:id="@+id/register"
+            <android.widget.Button
+                android:id="@+id/call"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
                 android:layout_margin="15dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/transparent_button"
+                android:text="CALL"
+                android:textColor="@color/textcolor" />
+
+            <android.widget.Button
+                android:id="@+id/direction"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_gravity="right"
+                android:layout_margin="15dp"
+                android:background="@drawable/transparent_button"
+                android:text="Direction"
+                android:textColor="@color/textcolor" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/registercard"
+            android:layout_width="409dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="@color/card_backgrond"
+            app:layout_constraintEnd_toEndOf="@+id/card1"
+            app:layout_constraintStart_toStartOf="@+id/card1"
+            app:layout_constraintTop_toBottomOf="@+id/card1">
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_margin="15dp"
                 android:text="Register" />
         </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/qrImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="60dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registercard" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
