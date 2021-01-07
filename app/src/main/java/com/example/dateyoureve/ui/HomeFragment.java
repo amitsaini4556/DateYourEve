@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.dateyoureve.MyHomeAdapter;
 import com.example.dateyoureve.MyHomeData;
@@ -39,8 +40,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
-    private List<MyHomeData> myHomeData;
+    private List<MyHomeData> myHomeData = null;
     DatabaseReference databaseReference;
+    SwipeRefreshLayout swipeRefreshLayout;
     ProgressBar progressBar;
     String s1,s2,s3,s4,s5;
     RecyclerView recyclerView;
@@ -81,12 +83,14 @@ public class HomeFragment extends Fragment {
             }
         });
         progressBar = root.findViewById(R.id.loader);
+        swipeRefreshLayout = root.findViewById(R.id.swipeRefreshLayout);
         progressBar.setVisibility(View.VISIBLE);
         myHomeData = new ArrayList<MyHomeData>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Events");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myHomeData.clear();
                 for(DataSnapshot dataEvent : snapshot.getChildren())
                 {
                     myHomeData.add(dataEvent.getValue(MyHomeData.class));
@@ -99,6 +103,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                //Collections.shuffle(myHomeData);
             }
         });
         return root;
@@ -165,12 +176,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+    public void onResume() {
+        super.onResume();
     }
 }

@@ -1,8 +1,10 @@
 package com.example.dateyoureve;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -29,6 +32,7 @@ public class InterestedUsersList extends AppCompatActivity {
     private List<User> interestedUsersData;
     DatabaseReference databaseReferenceIns,databaseReferenceEve;
     FirebaseUser mAuth;
+    FloatingActionButton qrbtn;
     String path;
 
     @Override
@@ -36,6 +40,7 @@ public class InterestedUsersList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interested_users_list);
         progressBar = findViewById(R.id.progressBarInterestList);
+        qrbtn = findViewById(R.id.qrbtn);
         progressBar.setVisibility(View.VISIBLE);
         Toolbar toolbar = findViewById(R.id.interestedPeopleList);
         setSupportActionBar(toolbar);
@@ -60,7 +65,8 @@ public class InterestedUsersList extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             interestedUsersData.add(snapshot.getValue(User.class));
-                            myAdapter.notifyDataSetChanged();
+                            myAdapter = new InterestedUsersAdapter(interestedUsersData,InterestedUsersList.this);
+                            recyclerView.setAdapter(myAdapter);
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -69,7 +75,6 @@ public class InterestedUsersList extends AppCompatActivity {
                     });
                 }
                 progressBar.setVisibility(View.GONE);
-                myAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -92,7 +97,24 @@ public class InterestedUsersList extends AppCompatActivity {
 
             }
         });
-        myAdapter = new InterestedUsersAdapter(interestedUsersData,InterestedUsersList.this);
-        recyclerView.setAdapter(myAdapter);
+        if (interestedUsersData.size() == 0)
+            progressBar.setVisibility(View.GONE);
+        qrbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(interestedUsersData.size() == 0)
+                {
+                    Toast.makeText(getApplicationContext(), "Attendees list empty!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getApplicationContext(),QrScanner.class);
+                    intent.putExtra("eventId",getIntent().getStringExtra("eventId"));
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
+
 }

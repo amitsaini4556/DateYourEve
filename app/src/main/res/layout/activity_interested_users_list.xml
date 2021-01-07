@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundcolor"
     tools:context=".InterestedUsersList">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,19 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/recyclerView"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/qrbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/interestedPeopleList"
+        app:layout_constraintVertical_bias="0.93"
+        app:srcCompat="@drawable/qr" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

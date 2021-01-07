@@ -1,12 +1,17 @@
 package com.example.dateyoureve;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -29,6 +34,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import java.io.IOException;
+import java.util.List;
 
 public class EventDetails extends AppCompatActivity {
     Button callbutton,register,direction;
@@ -41,6 +54,7 @@ public class EventDetails extends AppCompatActivity {
     DatabaseReference databaseReference;
     ProgressBar progressBar;
     boolean preOrnot;
+    ImageView qrImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +67,8 @@ public class EventDetails extends AppCompatActivity {
             Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
+            finish();
+            recreate();
         }
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -61,6 +77,7 @@ public class EventDetails extends AppCompatActivity {
         toolBarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorPrimary));
         decs = findViewById(R.id.decsView);
         imageView = findViewById(R.id.eventImage);
+        qrImage = findViewById(R.id.qrImage);
         dateVenue = findViewById(R.id.dateVenue);
         notes = findViewById(R.id.notesView);
         Glide.with(this)
@@ -80,6 +97,18 @@ public class EventDetails extends AppCompatActivity {
                 if(snapshot.hasChild(getIntent().getStringExtra("eventId")))
                 {
                     register.setEnabled(false);
+                    MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                    try {
+                        BitMatrix matrix = multiFormatWriter.encode(auth.getUid(), BarcodeFormat.QR_CODE,500,500);
+                        BarcodeEncoder encoder = new BarcodeEncoder();
+                        Bitmap bitmap = encoder.createBitmap(matrix);
+                        qrImage.setImageBitmap(bitmap);
+                        InputMethodManager manager = (InputMethodManager) getSystemService(
+                                Context.INPUT_METHOD_SERVICE
+                        );
+                    } catch (WriterException e) {
+                        e.printStackTrace();
+                    }
                 }else
                 {
                     register.setEnabled(true);
@@ -108,12 +137,25 @@ public class EventDetails extends AppCompatActivity {
                 String sSource = addr;
                 String sDestination = getIntent().getStringExtra("venue");
                 try {
-                    Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + sSource + "/" + sDestination);
-                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                    intent.setPackage("com.google.android.apps.maps");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }catch (ActivityNotFoundException e){
+                    Geocoder coder = new Geocoder(getApplicationContext());
+                    List<Address> address;
+                    Address location = null;
+
+                    try {
+                        address = coder.getFromLocationName(sDestination,5);
+                        location=address.get(0);
+                        location.getLatitude();
+                        location.getLongitude();
+                        Uri uri = Uri.parse("google.navigation:q=" + location.getLatitude() + "," + location.getLongitude() + "&mode=l");
+                        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                        intent.setPackage("com.google.android.apps.maps");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }catch (ActivityNotFoundException e)
+                    {
+
+                    }
+                }catch (ActivityNotFoundException | IOException e){
                     Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
                     Intent intent = new Intent(Intent.ACTION_VIEW,uri);
                     startActivity(intent);
@@ -151,5 +193,10 @@ public class EventDetails extends AppCompatActivity {
         DatabaseReference data = FirebaseDatabase.getInstance().getReference("Events");
         data.child(getIntent().getStringExtra("eventId")).child("InterestedPeoples").child(user.getUid()).setValue(userId);
         Log.i("test",getIntent().getStringExtra("eventId"));
+    }
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
     }
 }
