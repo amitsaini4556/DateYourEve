@@ -156,7 +156,7 @@ public class CreateEvent extends AppCompatActivity {
             cmonth=calendar.get(Calendar.MONTH);
             cyear=calendar.get(Calendar.YEAR);
 
-            DatePickerDialog datePickerDialog =new DatePickerDialog(CreateEvent.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+            DatePickerDialog datePickerDialog =new DatePickerDialog(CreateEvent.this, R.style.UserDialog, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int date) {
 
@@ -167,6 +167,12 @@ public class CreateEvent extends AppCompatActivity {
                 }
             },cyear,cmonth,cdate);
             datePickerDialog.show();
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.textcolor));
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.textcolor));
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setBackgroundColor(getResources().getColor(R.color.trans));
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setBackgroundColor(getResources().getColor(R.color.trans));
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setGravity(View.FOCUS_LEFT);
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setGravity(View.FOCUS_RIGHT);
         });
 
         selectvenue.setOnClickListener(view -> {
