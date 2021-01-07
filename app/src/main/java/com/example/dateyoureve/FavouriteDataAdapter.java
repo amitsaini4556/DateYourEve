@@ -74,7 +74,7 @@ public class FavouriteDataAdapter extends RecyclerView.Adapter<FavouriteDataAdap
             @Override
             public void onClick(View view) {
                 builder = new AlertDialog.Builder(context.getActivity(),R.style.DialogTheme);
-                builder.setMessage("Are you sure ?")
+                builder
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -102,7 +102,7 @@ public class FavouriteDataAdapter extends RecyclerView.Adapter<FavouriteDataAdap
                             }
                         });
                 AlertDialog alertDialog = builder.create();
-                alertDialog.setTitle("Delete");
+                alertDialog.setTitle("Delete \nAre you sure ?");
                 alertDialog.show();
             }
         });
